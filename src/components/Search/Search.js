@@ -4,9 +4,9 @@ import SearchInput from './SearchInput/SearchInput';
 
 import './Search.css';
 
-const Search = () => (
-  <form action="/" method="get" className="search-form">
-    <SearchInput />
+const Search = ({ searchQuery, setSearchQuery }) => (
+  <form className="search-form">
+    <SearchInput  searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
     <SearchButton />
   </form>
 );

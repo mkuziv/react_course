@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Search from './components/Search/Search';
 import Posts from './components/Posts/Posts';
 
@@ -10,15 +10,34 @@ const App = () => {
     { id: '3', name: 'Kill Bill: Vol 2' },
     { id: '4', name: 'Avengers: War of Infinity' },
     { id: '5', name: 'Inception' },
-];
-return (
-  <>
-    <h1>Hello World</h1>
-    <Search />
-    <Posts posts={film_posts}/>
-  </>
-)
-  
+  ];
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [posts, setPosts] = useState(film_posts);
+
+  const filterPosts = (arrayOfPosts, query) => {
+    if (!query) {
+      return arrayOfPosts;
+    }
+
+    return arrayOfPosts.filter((post) => {
+      const postName = post.name.toLowerCase();
+      return postName.includes(query.toLowerCase());
+    });
+  }
+
+  useEffect(() => {
+    setPosts(filterPosts(film_posts, searchQuery));
+  }, [searchQuery])
+
+  return (
+    <>
+      <h1>Hello World</h1>
+      <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <Posts posts={posts} />
+    </>
+  )
+
 };
 
 export default App;

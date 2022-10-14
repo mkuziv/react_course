@@ -1,14 +1,18 @@
 import React from 'react';
 import './SearchInput.css';
 
-function SearchInput() {
+function SearchInput({ searchQuery, setSearchQuery }) {
+  const handleChange = (event) => {
+    setSearchQuery(event.target.value);
+  }
+
   return (
-    <input 
+    <input
+      value={searchQuery}
+      onChange={handleChange}
       className="search-input"
       type="text"
-      id="header-search"
-      placeholder="What do you want to watch?"
-      name="s" />
+      placeholder="What do you want to watch?"/>
   );
 };
 
