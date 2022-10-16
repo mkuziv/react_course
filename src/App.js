@@ -4,6 +4,8 @@ import Posts from './components/Posts/Posts';
 import Counter from './components/Counter/Counter';
 import Title from './components/Title/Title';
 
+import './App.css';
+
 
 const App = () => {
   const film_posts = [
