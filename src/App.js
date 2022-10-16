@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Search from './components/Search/Search';
 import Posts from './components/Posts/Posts';
+import Counter from './components/Counter/Counter';
 
 
 const App = () => {
@@ -35,6 +36,7 @@ const App = () => {
       <h1>Hello World</h1>
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <Posts posts={posts} />
+      <Counter />
     </>
   )
 
