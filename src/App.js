@@ -3,6 +3,7 @@ import Search from './components/Search/Search';
 import Posts from './components/Posts/Posts';
 import Counter from './components/Counter/Counter';
 import Title from './components/Title/Title';
+import ToggleMenu from './components/ToggleMenu/ToggleMenu';
 
 import './App.css';
 
@@ -44,6 +45,7 @@ const App = () => {
       <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} setIsSubmitted={setIsSubmitted}/>
       <Posts posts={posts} />
       <Counter />
+      <ToggleMenu />
     </>
   )
 
