@@ -4,11 +4,17 @@ import SearchInput from './SearchInput/SearchInput';
 
 import './Search.css';
 
-const Search = ({ searchQuery, setSearchQuery }) => (
-  <form className="search-form">
-    <SearchInput  searchQuery={searchQuery} setSearchQuery={setSearchQuery}/>
-    <SearchButton />
-  </form>
-);
+const Search = ({ searchQuery, setSearchQuery, setIsSubmitted }) => {
+  function handleSubmit(e) {
+    e.preventDefault();
+    setIsSubmitted(true);
+  }
+  return (
+    <form className="search-form" onSubmit={handleSubmit}>
+      <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <SearchButton />
+    </form>
+  )
+};
 
 export default Search;

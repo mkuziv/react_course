@@ -16,11 +16,9 @@ const App = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
   const [posts, setPosts] = useState(film_posts);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const filterPosts = (arrayOfPosts, query) => {
-    if (!query) {
-      return arrayOfPosts;
-    }
 
     return arrayOfPosts.filter((post) => {
       const postName = post.name.toLowerCase();
@@ -29,13 +27,19 @@ const App = () => {
   }
 
   useEffect(() => {
-    setPosts(filterPosts(film_posts, searchQuery));
-  }, [searchQuery])
+    if (!searchQuery) setPosts(filterPosts(film_posts, searchQuery));
+
+    if(isSubmitted) {
+      setPosts(filterPosts(film_posts, searchQuery));
+    }
+
+    setIsSubmitted(false);
+  }, [isSubmitted, searchQuery])
 
   return (
     <>
       <Title  name="World"/>
-      <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <Search searchQuery={searchQuery} setSearchQuery={setSearchQuery} setIsSubmitted={setIsSubmitted}/>
       <Posts posts={posts} />
       <Counter />
     </>
