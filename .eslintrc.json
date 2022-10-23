@@ -1,28 +1,37 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
-    },
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "airbnb",
+    "airbnb-typescript"
+  ],
+  "overrides": [],
+  "parserOptions": {
     "extends": [
-        "airbnb",
-        "airbnb-typescript"
+      "airbnb",
+      "airbnb-typescript"
     ],
-    "overrides": [],
-    "parserOptions": {
-        "extends": ["airbnb", "airbnb-typescript"],
-        "ecmaVersion": "latest",
-        "sourceType": "module",
-        "project": ["./tsconfig.json"]
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "react/function-component-definition": [
-            2,
-            {
-                "namedComponents": ["function-declaration", "arrow-function"]
-            }
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": [
+      "./tsconfig.json"
+    ]
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": [
+          "function-declaration",
+          "arrow-function"
         ]
-    }
+      }
+    ],
+    "linebreak-style": ["error", "windows"]
+  }
 }
