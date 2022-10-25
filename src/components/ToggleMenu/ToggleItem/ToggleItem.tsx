@@ -4,20 +4,17 @@ import './ToggleItem.css';
 
 interface ToggleItemProp {
   title: string;
-  handleClick: (e: React.SyntheticEvent) => void;
+  handleClick: (e: React.MouseEvent) => void;
   active: string;
 }
-const ToggleItem = (props: ToggleItemProp) => {
-  const { title, handleClick, active } = props;
-  return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events,
-    <li
-      className={`toggle-item ${(active === title ? 'active' : '')}`}
-      onClick={handleClick}
-    >
-      {title}
-    </li>
-  );
-};
+const ToggleItem = ({ title, handleClick, active }: ToggleItemProp) => (
+  <button
+    type="button"
+    className={`toggle-item ${(active === title ? 'active' : '')}`}
+    onClick={handleClick}
+  >
+    {title}
+  </button>
+);
 
 export default ToggleItem;

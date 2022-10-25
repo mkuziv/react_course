@@ -6,11 +6,6 @@ interface TitleProp {
   name: string
 }
 
-class Title extends React.PureComponent<TitleProp, {}> {
-  render() {
-    const { name } = this.props;
-    return React.createElement('h1', null, `Hello ${name}`);
-  }
-}
+const Title = ({ name }: TitleProp) => <h1>{`Hello ${name}`}</h1>;
 
 export default Title;

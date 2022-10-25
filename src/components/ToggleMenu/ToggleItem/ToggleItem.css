@@ -7,6 +7,8 @@
   text-transform: uppercase;
   color: #FFFFFF;
   cursor: pointer;
+  border: none;
+  background: #CDCDCD;
 }
 
 .active::after {

@@ -27,7 +27,6 @@
       2,
       {
         "namedComponents": [
-          "function-declaration",
           "arrow-function"
         ]
       }

@@ -7,15 +7,15 @@ import './Search.css';
 interface SearchProp {
   searchQuery: string;
   setSearchQuery: (value: string) => void;
-  setIsSubmitted: (value:boolean) => void;
+  setIsSubmitted: (value: boolean) => void;
 }
 
-const Search = (props: SearchProp) => {
-  const { searchQuery, setSearchQuery, setIsSubmitted } = props;
-  function handleSubmit(e: React.SyntheticEvent) {
+const Search = ({ searchQuery, setSearchQuery, setIsSubmitted }: SearchProp) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitted(true);
-  }
+  };
+
   return (
     <form className="search-form" onSubmit={handleSubmit}>
       <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />

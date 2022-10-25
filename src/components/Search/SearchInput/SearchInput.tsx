@@ -6,9 +6,8 @@ interface SearchInputProp {
   setSearchQuery: (value: string) => void;
 }
 
-function SearchInput(props: SearchInputProp) {
-  const { searchQuery, setSearchQuery } = props;
-  const handleChange = (event: React.SyntheticEvent) => {
+const SearchInput = ({ searchQuery, setSearchQuery }: SearchInputProp) => {
+  const handleChange = (event: React.ChangeEvent) => {
     setSearchQuery((event.target as HTMLInputElement).value);
   };
 
@@ -21,6 +20,6 @@ function SearchInput(props: SearchInputProp) {
       placeholder="What do you want to watch?"
     />
   );
-}
+};
 
 export default SearchInput;

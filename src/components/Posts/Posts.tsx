@@ -1,5 +1,5 @@
 import React from 'react';
-import { Post } from '../../types';
+import { Post } from '../../types/interfaces';
 
 import './Posts.css';
 
@@ -7,15 +7,12 @@ interface PostsProp {
   posts: Post[];
 }
 
-function Posts(props: PostsProp) {
-  const { posts } = props;
-  return (
-    <ul className="posts">
-      {posts.map((post: Post) => (
-        <li key={post.id}>{post.name}</li>
-      ))}
-    </ul>
-  );
-}
+const Posts = ({ posts }: PostsProp) => (
+  <ul className="posts">
+    {posts.map((post: Post) => (
+      <li key={post.id}>{post.name}</li>
+    ))}
+  </ul>
+);
 
 export default Posts;

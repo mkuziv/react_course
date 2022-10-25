@@ -3,10 +3,10 @@ import ToggleItem from './ToggleItem/ToggleItem';
 import './ToggleMenu.css';
 
 const ToggleMenu = () => {
-  const [active, setActive] = useState<string>('all');
+  const [active, setActive] = useState('all');
   const menuItem = ['all', 'documentary', 'horror', 'crime'];
 
-  const handleClick = (e: React.SyntheticEvent) => {
+  const handleClick = (e: React.MouseEvent) => {
     setActive((e.target as HTMLInputElement).innerHTML);
   };
 

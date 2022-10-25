@@ -3,22 +3,15 @@ import Search from './components/Search/Search';
 import Posts from './components/Posts/Posts';
 import Title from './components/Title/Title';
 import ToggleMenu from './components/ToggleMenu/ToggleMenu';
-import { Post } from './types';
+import { Post } from './types/interfaces';
+import filmPosts from './mock';
 
 import './App.css';
 
 const App = () => {
-  const filmPosts: Post[] = [
-    { id: '1', name: 'Pulp fiction' },
-    { id: '2', name: 'Bohemian Rhapsody' },
-    { id: '3', name: 'Kill Bill: Vol 2' },
-    { id: '4', name: 'Avengers: War of Infinity' },
-    { id: '5', name: 'Inception' },
-  ];
-
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [posts, setPosts] = useState<Post[]>(filmPosts);
-  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const filterPosts = (arrayOfPosts: Post[], query: string) => (
 
