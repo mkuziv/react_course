@@ -6,7 +6,7 @@ import ToggleMenu from './components/ToggleMenu/ToggleMenu';
 import { Post } from './types/interfaces';
 import filmPosts from './mock';
 
-import './App.css';
+import './App.scss';
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');

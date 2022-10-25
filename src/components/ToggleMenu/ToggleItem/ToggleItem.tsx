@@ -1,6 +1,5 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
-import './ToggleItem.css';
+import './ToggleItem.scss';
 
 interface ToggleItemProp {
   title: string;

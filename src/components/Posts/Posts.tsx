@@ -1,7 +1,7 @@
 import React from 'react';
 import { Post } from '../../types/interfaces';
 
-import './Posts.css';
+import './Posts.scss';
 
 interface PostsProp {
   posts: Post[];

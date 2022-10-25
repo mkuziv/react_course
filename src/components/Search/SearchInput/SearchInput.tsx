@@ -1,5 +1,5 @@
 import React from 'react';
-import './SearchInput.css';
+import './SearchInput.scss';
 
 interface SearchInputProp {
   searchQuery: string;

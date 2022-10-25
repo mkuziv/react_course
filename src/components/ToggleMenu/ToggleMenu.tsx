@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ToggleItem from './ToggleItem/ToggleItem';
-import './ToggleMenu.css';
+import './ToggleMenu.scss';
 
 const ToggleMenu = () => {
   const [active, setActive] = useState('all');
