@@ -1,7 +1,7 @@
 import React from 'react';
-import SearchButton from './SearchButton/SearchButton';
 import SearchInput from './SearchInput/SearchInput';
 
+import Button from '../Button/Button';
 import './Search.scss';
 
 interface SearchProp {
@@ -19,7 +19,7 @@ const Search = ({ searchQuery, setSearchQuery, setIsSubmitted }: SearchProp) => 
   return (
     <form className="search-form" onSubmit={handleSubmit}>
       <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <SearchButton />
+      <Button type="submit" name="search" btn="red-big" />
     </form>
   );
 };

@@ -6,6 +6,6 @@ interface TitleProp {
   name: string
 }
 
-const Title = ({ name }: TitleProp) => <h1>{`Hello ${name}`}</h1>;
+const Title = ({ name }: TitleProp) => <h2 className="title">{name}</h2>;
 
 export default Title;

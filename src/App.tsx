@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Search from './components/Search/Search';
+import Header from './components/Header/Header';
 import Posts from './components/Posts/Posts';
-import Title from './components/Title/Title';
 import ToggleMenu from './components/ToggleMenu/ToggleMenu';
-import { Post } from './types/interfaces';
 import filmPosts from './mock';
+import { Post } from './types/interfaces';
 
 import './App.scss';
 
@@ -33,13 +32,12 @@ const App = () => {
 
   return (
     <>
-      <Title name="World" />
-      <ToggleMenu />
-      <Search
+      <Header
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         setIsSubmitted={setIsSubmitted}
       />
+      <ToggleMenu />
       <Posts posts={posts} />
     </>
   );
