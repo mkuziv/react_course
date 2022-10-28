@@ -1,5 +1,5 @@
 import React from 'react';
-import ToggleMenu from '../ToggleMenu/ToggleMenu';
+import MainMenu from '../MainMenu/MainMenu';
 import Posts from '../Posts/Posts';
 import { Post } from '../../types/interfaces';
 
@@ -13,7 +13,7 @@ const Main = ({ posts }: MainProp) => (
   <main
     className="main"
   >
-    <ToggleMenu />
+    <MainMenu />
     <Posts posts={posts} />
   </main>
 );

@@ -19,7 +19,6 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'index_bundle.js',
-    publicPath: '/',
     chunkFilename: '[name].[chunkhash].js',
     assetModuleFilename: 'images/[hash][ext][query]',
     clean: true,
@@ -53,13 +52,8 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpe?g|gif|svg|ico)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {},
-          },
-        ],
+        test: /\.(png|jpe?g|gif|svg|ico)$/,
+        type: 'asset/resource',
       },
       {
         test: /\.(woff|woff2|ttf|otf|eot)$/,

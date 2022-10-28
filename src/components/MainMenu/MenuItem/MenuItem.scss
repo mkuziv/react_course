@@ -1,6 +1,6 @@
 .toggle-item {
   position: relative;
-  margin-left: 30px;
+  margin-right: 30px;
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
@@ -11,10 +11,14 @@
   background: #232323;
 }
 
+.toggle-item:hover {
+  color: #D42828;
+}
+
 .active::after {
     position: relative;
     content: '';
-    top: 3px;
+    top: 23px;
     border-bottom: 3px solid #D42828;
     display: block;
 }

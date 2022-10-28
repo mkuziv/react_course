@@ -1,5 +1,5 @@
 import React from 'react';
-import './ToggleItem.scss';
+import './MenuItem.scss';
 
 interface ToggleItemProp {
   title: string;

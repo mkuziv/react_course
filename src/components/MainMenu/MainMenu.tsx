@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ToggleItem from './ToggleItem/ToggleItem';
-import './ToggleMenu.scss';
+import MenuItem from './MenuItem/MenuItem';
+import './MainMenu.scss';
 
 const ToggleMenu = () => {
   const [active, setActive] = useState('all');
@@ -14,9 +14,17 @@ const ToggleMenu = () => {
     <div className="menu-wrapper">
       <ul className="menu">
         {menuItem.map((item) => (
-          <ToggleItem handleClick={handleClick} key={`${item}`} title={item} active={active} />
+          <MenuItem handleClick={handleClick} key={`${item}`} title={item} active={active} />
         ))}
       </ul>
+      <div className="sort">
+        SORT BY
+        <select name="sort" id="movie-select">
+          <option value="release date">release date</option>
+          <option value="rating">rating</option>
+          <option value="rantime">rantime</option>
+        </select>
+      </div>
     </div>
   );
 };
