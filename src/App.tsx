@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from './components/Header/Header';
-import Posts from './components/Posts/Posts';
-import ToggleMenu from './components/ToggleMenu/ToggleMenu';
+import Main from './components/Main/Main';
 import filmPosts from './mock';
 import { Post } from './types/interfaces';
 
@@ -37,8 +36,7 @@ const App = () => {
         setSearchQuery={setSearchQuery}
         setIsSubmitted={setIsSubmitted}
       />
-      <ToggleMenu />
-      <Posts posts={posts} />
+      <Main posts={posts} />
     </>
   );
 };

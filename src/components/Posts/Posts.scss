@@ -1,8 +1,22 @@
-.posts {
-  list-style-type: none;
-  background: #CDCDCD;
+.posts-section {
+  width: 1200px;
+  margin: 0 auto;
   padding: 20px;
-  width: 960px;
+
+  span {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #FFFFFF;
+  }
+}
+
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style-type: none;
+  background: #232323;
   margin: 5px auto;
   border-radius: 5px;
 }
