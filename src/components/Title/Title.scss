@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .title {
   width: 960px;
   margin: 35px auto;
@@ -8,5 +10,5 @@
   letter-spacing: 1px;
   text-transform: uppercase;
 
-  color: #FFFFFF;
+  color: $white;
 }

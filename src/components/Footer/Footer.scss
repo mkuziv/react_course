@@ -1,7 +1,8 @@
+@import '../../styles/variables.scss';
 .footer {
   width: 1200px;
   height: 70px;
-  background: #424242;
+  background: $gray;
   margin: 0 auto;
   display: flex;
   justify-content: center;

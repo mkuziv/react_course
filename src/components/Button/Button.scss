@@ -1,8 +1,11 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
 .red-big {
   width: 233px;
   height: 57px;
-  background: #F65261;
-  color: #FFFFFF;
+  background: $red;
+  color: $white;
   border: none;
   border-radius: 4px;
   text-transform: uppercase;
@@ -20,13 +23,10 @@
   background: #606060ad;
   border-radius: 4px;
   font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
+  @include text(20px, 600, 24px, $red);
   text-align: center;
   text-transform: uppercase;
   border: none;
-  color: #F65261;
   cursor: pointer;
 }
 .grey:hover {
@@ -37,7 +37,7 @@
   position: relative;
   border-radius: 50%;
   border: none;
-  color: #FFFFFF;
+  color: $white;
   width: 36px;
   height: 36px;
   background: #2A202D;

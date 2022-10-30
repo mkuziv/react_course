@@ -1,7 +1,10 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
 .menu-wrapper {
   display: flex;
   justify-content: space-between;
-  background: #232323;
+  background: $darkGray;
   padding: 20px 0;
   width: 1084px;
   margin: 5px auto;
@@ -15,17 +18,14 @@
 }
 
 .sort {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
+  @include text(16px, 400, 20px, $white);
   letter-spacing: 0.888889px;
   text-transform: uppercase;
-  color: #FFFFFF;
   opacity: 0.6;
 
   #movie-select {
-    color: #FFFFFF;
-    background-color: #232323;
+    color: $white;
+    background-color: $darkGray;
     text-transform: uppercase;
     border: none;
     font-size: 16px;

@@ -1,13 +1,13 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
 .posts-section {
   width: 1200px;
   margin: 0 auto;
   padding: 20px 58px;
 
-  span {
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    color: #FFFFFF;
+  span {    
+    @include text(20px, 400, 24px, $white);
   }
 }
 
@@ -16,7 +16,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   list-style-type: none;
-  background: #232323;
+  background: $darkGray;
   margin: 5px auto;
   border-radius: 5px;
 }

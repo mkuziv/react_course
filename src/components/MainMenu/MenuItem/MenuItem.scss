@@ -1,17 +1,17 @@
-.toggle-item {
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixin.scss';
+
+.menu-item {
+  @include text(16px, 500, 20px, $white);
   position: relative;
   margin-right: 30px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
   text-transform: uppercase;
-  color: #FFFFFF;
   cursor: pointer;
   border: none;
-  background: #232323;
+  background: $darkGray;
 }
 
-.toggle-item:hover {
+.menu-item:hover {
   color: #D42828;
 }
 

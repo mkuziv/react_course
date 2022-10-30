@@ -1,19 +1,19 @@
 import React from 'react';
 import './MenuItem.scss';
 
-interface ToggleItemProp {
+interface MenuItemProp {
   title: string;
   handleClick: (e: React.MouseEvent) => void;
   active: string;
 }
-const ToggleItem = ({ title, handleClick, active }: ToggleItemProp) => (
+const MenuItem = ({ title, handleClick, active }: MenuItemProp) => (
   <button
     type="button"
-    className={`toggle-item ${(active === title ? 'active' : '')}`}
+    className={`menu-item ${(active === title ? 'active' : '')}`}
     onClick={handleClick}
   >
     {title}
   </button>
 );
 
-export default ToggleItem;
+export default MenuItem;
