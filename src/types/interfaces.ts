@@ -3,5 +3,5 @@ export interface Post {
   name: string;
   year: string;
   genre: string;
-  folderName: string;
+  imgName: string;
 }

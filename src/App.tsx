@@ -11,20 +11,34 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [posts, setPosts] = useState<Post[]>(filmPosts);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [active, setActive] = useState('all');
 
-  const filterPosts = (arrayOfPosts: Post[], query: string) => (
+  const filterPostsByName = (arrayOfPosts: Post[], query: string) => (
 
-    arrayOfPosts.filter((post) => {
+    arrayOfPosts.filter((post: Post) => {
       const postName = post.name.toLowerCase();
       return postName.includes(query.toLowerCase());
     })
   );
 
+  const filterPostsByGenre = (arrayOfPosts: Post[], genre: string) => {
+    if (genre === 'all') return arrayOfPosts;
+
+    return arrayOfPosts.filter((post: Post) => {
+      const postName = post.genre.toLowerCase();
+      return postName.includes(genre);
+    });
+  };
+
   useEffect(() => {
-    if (!searchQuery) setPosts(filterPosts(filmPosts, searchQuery));
+    setPosts(filterPostsByGenre(filmPosts, active));
+  }, [active]);
+
+  useEffect(() => {
+    if (!searchQuery) setPosts(filterPostsByName(filmPosts, searchQuery));
 
     if (isSubmitted) {
-      setPosts(filterPosts(filmPosts, searchQuery));
+      setPosts(filterPostsByName(filmPosts, searchQuery));
     }
 
     setIsSubmitted(false);
@@ -37,7 +51,7 @@ const App = () => {
         setSearchQuery={setSearchQuery}
         setIsSubmitted={setIsSubmitted}
       />
-      <Main posts={posts} />
+      <Main posts={posts} active={active} setActive={setActive} />
       <Footer />
     </>
   );

@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MenuItem from './MenuItem/MenuItem';
 import './MainMenu.scss';
 
-const ToggleMenu = () => {
-  const [active, setActive] = useState('all');
+interface MainMenuProp {
+  active: string;
+  setActive: (value: string) => void;
+}
+
+const MainMenu = ({ active, setActive }: MainMenuProp) => {
   const menuItem = ['all', 'documentary', 'horror', 'crime'];
 
   const handleClick = (e: React.MouseEvent) => {
@@ -29,4 +33,4 @@ const ToggleMenu = () => {
   );
 };
 
-export default ToggleMenu;
+export default MainMenu;

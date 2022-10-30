@@ -7,13 +7,15 @@ import './Main.scss';
 
 interface MainProp {
   posts: Post[];
+  active: string;
+  setActive: (value: string) => void;
 }
 
-const Main = ({ posts }: MainProp) => (
+const Main = ({ posts, active, setActive }: MainProp) => (
   <main
     className="main"
   >
-    <MainMenu />
+    <MainMenu active={active} setActive={setActive} />
     <Posts posts={posts} />
   </main>
 );
