@@ -1,5 +1,5 @@
 import React from 'react';
-import './MenuItem.scss';
+import './FilterItem.scss';
 
 interface MenuItemProp {
   title: string;

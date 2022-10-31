@@ -1,4 +1,5 @@
 @import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
 
 .movie {
   width: 327px;
@@ -6,12 +7,21 @@
 }
 .img {
   height: 462px;
-  width: 327px;
+  width: 100%;
   background: url('../../images/avengers_war_of_infinity_bg.png');
   background-size: contain;
   color: transparent;
   text-align: right;
   padding: 14px;
+
+  .hov {
+    display: none;
+  }
+}
+
+.img:hover > .hov {
+  display: inline-block;
+  text-align: right;
 }
 
 .description {
@@ -23,9 +33,7 @@
     display: flex;
     justify-content: space-between;
     font-style: normal;
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
+    @include text(18px, 500, 22px);
     color: $white;
     opacity: 0.7;
     text-transform: capitalize;

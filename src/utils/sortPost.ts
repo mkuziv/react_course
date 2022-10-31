@@ -1,13 +1,9 @@
 import { Post } from '../types/interfaces';
 
-export const sortPostsByRating = (arrayOfPosts: Post[]) => (
-  arrayOfPosts.sort((a: Post, b: Post) => b.rating - a.rating)
+type SortingValue = keyof Post;
+
+const sortPosts = (arrayOfPosts: Post[], valueOfSorting: SortingValue) => (
+  arrayOfPosts.sort((a: Post, b: Post) => Number(b[valueOfSorting]) - Number(a[valueOfSorting]))
 );
 
-export const sortPostsByDate = (arrayOfPosts: Post[]) => (
-  arrayOfPosts.sort((a: Post, b: Post) => a.year - b.year)
-);
-
-export const sortPostsByRuntime = (arrayOfPosts: Post[]) => (
-  arrayOfPosts.sort((a: Post, b: Post) => a.runtime - b.runtime)
-);
+export default sortPosts;

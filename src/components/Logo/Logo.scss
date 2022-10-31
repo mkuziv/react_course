@@ -2,9 +2,6 @@
 @import '../../styles/mixin.scss';
 
 .logo {
-  @include text(20px, 400, 24px,  $red);
-
-  .bold {
-    font-weight: 900;
-  }
+  @include text(20px, 400, 24px);
+  color: $red;
 }

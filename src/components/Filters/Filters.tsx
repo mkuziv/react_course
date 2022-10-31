@@ -1,18 +1,18 @@
 import React from 'react';
-import MenuItem from './MenuItem/MenuItem';
-import './MainMenu.scss';
+import FilterItem from './FilterItem/FilterItem';
+import './Filters.scss';
 
-interface MainMenuProp {
+interface FiltersProp {
   active: string;
   setActive: (value: string) => void;
   sort: string;
   setSort: (value: string) => void;
 }
 
-const MainMenu = ({
+const Filters = ({
   active, setActive, sort, setSort,
-}: MainMenuProp) => {
-  const menuItem = ['all', 'documentary', 'comedy', 'horror', 'crime'];
+}: FiltersProp) => {
+  const filterItems = ['all', 'documentary', 'comedy', 'horror', 'crime'];
 
   const handleClick = (e: React.MouseEvent) => {
     setActive((e.target as HTMLInputElement).innerHTML);
@@ -25,20 +25,22 @@ const MainMenu = ({
   return (
     <div className="menu-wrapper">
       <ul className="menu">
-        {menuItem.map((item) => (
-          <MenuItem handleClick={handleClick} key={`${item}`} title={item} active={active} />
+        {filterItems.map((item) => (
+          <li>
+            <FilterItem handleClick={handleClick} key={`${item}`} title={item} active={active} />
+          </li>
         ))}
       </ul>
       <div className="sort">
         SORT BY
         <select name="sort" id="movie-select" value={sort} onChange={handleChange}>
-          <option value="date">release date</option>
+          <option value="year">release date</option>
           <option value="rating">rating</option>
-          <option value="rantime">rantime</option>
+          <option value="runtime">runtime</option>
         </select>
       </div>
     </div>
   );
 };
 
-export default MainMenu;
+export default Filters;

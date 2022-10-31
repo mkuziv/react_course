@@ -3,19 +3,19 @@ import React from 'react';
 import './Button.scss';
 
 interface BtnProp {
-  name: string;
+  content: string;
   type: 'button' | 'submit';
   btn: string;
 }
 
 const Button: React.FC<BtnProp> = ({
-  name, type = 'button', btn,
+  content, type = 'button', btn,
 }) => (
   <button
     className={btn}
     type={type === 'button' ? 'button' : 'submit'}
   >
-    {name}
+    {content}
   </button>
 );
 

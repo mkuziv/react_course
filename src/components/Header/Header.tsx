@@ -16,7 +16,7 @@ const Header = ({ searchQuery, setSearchQuery, setIsSubmitted }: HeaderProp) => 
   <header className="header">
     <div className="wrapper">
       <Logo />
-      <Button type="button" name=" + add movie" btn="grey" />
+      <Button type="button" content=" + add movie" btn="grey" />
     </div>
     <Title name="FIND YOUR MOVIE" />
     <Search

@@ -19,7 +19,7 @@ const Search = ({ searchQuery, setSearchQuery, setIsSubmitted }: SearchProp) => 
   return (
     <form className="search-form" onSubmit={handleSubmit}>
       <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <Button type="submit" name="search" btn="red-big" />
+      <Button type="submit" content="search" btn="red-big" />
     </form>
   );
 };

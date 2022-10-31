@@ -4,7 +4,7 @@ import './Logo.scss';
 
 const Logo = () => (
   <h1 className="logo">
-    <span className="bold">netflix</span>
+    <strong>netflix</strong>
     roulette
   </h1>
 );

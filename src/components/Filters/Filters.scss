@@ -6,7 +6,7 @@
   justify-content: space-between;
   background: $darkGray;
   padding: 20px 0;
-  width: 1084px;
+  width: 90%;
   margin: 5px auto;
   border-bottom: 3px solid #424242;
 }
@@ -14,11 +14,12 @@
 .menu {
   display: flex;
   list-style-type: none;
-  width: 465px;
+  width: 50%;
 }
 
 .sort {
-  @include text(16px, 400, 20px, $white);
+  @include text(16px, 400, 20px);
+  color: $white;
   letter-spacing: 0.888889px;
   text-transform: uppercase;
   opacity: 0.6;

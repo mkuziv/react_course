@@ -1,5 +1,5 @@
 import React from 'react';
-import MainMenu from '../MainMenu/MainMenu';
+import Filters from '../Filters/Filters';
 import Posts from '../Posts/Posts';
 import { Post } from '../../types/interfaces';
 
@@ -19,7 +19,7 @@ const Main = ({
   <main
     className="main"
   >
-    <MainMenu active={active} setActive={setActive} sort={sort} setSort={setSort} />
+    <Filters active={active} setActive={setActive} sort={sort} setSort={setSort} />
     <Posts posts={posts} />
   </main>
 );

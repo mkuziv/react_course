@@ -2,12 +2,13 @@
 @import '../../../styles/mixin.scss';
 
 .search-input {
-  width: 713px;
+  width: 60%;
   height: 57px;
   background: rgba(50, 50, 50, 0.8);
   opacity: 0.7;
   border-radius: 4px;
   border: none;
-  @include text(20px, 400, 24px, $white);
+  @include text(20px, 400, 24px);
+  color: $white;
   text-indent: 19px;
 }

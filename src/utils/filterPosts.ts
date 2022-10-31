@@ -1,12 +1,13 @@
 import { Post } from '../types/interfaces';
 
-export const filterPostsByName = (arrayOfPosts: Post[], query: string) => (
+export const filterPostsByName = (arrayOfPosts: Post[], query: string) => {
+  if (query === '') return arrayOfPosts;
 
-  arrayOfPosts.filter((post: Post) => {
+  return arrayOfPosts.filter((post: Post) => {
     const postName = post.name.toLowerCase();
     return postName.includes(query.toLowerCase());
-  })
-);
+  });
+};
 
 export const filterPostsByGenre = (arrayOfPosts: Post[], genre: string) => {
   if (genre === 'all') return arrayOfPosts;

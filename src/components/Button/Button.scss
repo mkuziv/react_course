@@ -2,7 +2,7 @@
 @import '../../styles/mixin.scss';
 
 .red-big {
-  width: 233px;
+  width: 19%;
   height: 57px;
   background: $red;
   color: $white;
@@ -18,12 +18,13 @@
 }
 
 .grey {
-  width: 177px;
+  width: 18%;
   height: 46px;
   background: #606060ad;
   border-radius: 4px;
   font-style: normal;
-  @include text(20px, 600, 24px, $red);
+  @include text(20px, 600, 24px);
+  color: $red;
   text-align: center;
   text-transform: uppercase;
   border: none;

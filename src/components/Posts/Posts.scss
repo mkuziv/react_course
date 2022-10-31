@@ -2,12 +2,13 @@
 @import '../../styles/mixin.scss';
 
 .posts-section {
-  width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px 58px;
 
   span {    
-    @include text(20px, 400, 24px, $white);
+    @include text(20px, 400, 24px);
+    color: $white;
   }
 }
 

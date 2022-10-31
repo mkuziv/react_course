@@ -5,7 +5,7 @@ import filmPosts from './mock';
 import { Post } from './types/interfaces';
 import Footer from './components/Footer/Footer';
 import { filterPostsByGenre, filterPostsByName } from './utils/filterPosts';
-import { sortPostsByRating, sortPostsByDate, sortPostsByRuntime } from './utils/sortPost';
+import sortPosts from './utils/sortPost';
 
 import './App.scss';
 
@@ -14,23 +14,18 @@ const App = () => {
   const [posts, setPosts] = useState<Post[]>(filmPosts);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [active, setActive] = useState('all');
-  const [sort, setSort] = useState('date');
+  const [sort, setSort] = useState('year');
 
   useEffect(() => {
-    if (sort === 'rating') setPosts(sortPostsByRating(filmPosts));
+    if (sort === 'rating') setPosts(sortPosts(filmPosts, sort));
 
-    if (sort === 'rantime') setPosts(sortPostsByRuntime(filmPosts));
+    if (sort === 'runtime') setPosts(sortPosts(filmPosts, sort));
 
-    if (sort === 'date')setPosts(sortPostsByDate(filmPosts));
-
-    setActive('all');
-    setSearchQuery('');
+    if (sort === 'year')setPosts(sortPosts(filmPosts, sort));
   }, [sort]);
 
   useEffect(() => {
     setPosts(filterPostsByGenre(filmPosts, active));
-    setSearchQuery('');
-    setSort('date');
   }, [active]);
 
   useEffect(() => {
@@ -39,8 +34,6 @@ const App = () => {
     if (isSubmitted) {
       setPosts(filterPostsByName(filmPosts, searchQuery));
     }
-    setActive('all');
-    setSort('date');
 
     setIsSubmitted(false);
   }, [isSubmitted, searchQuery]);

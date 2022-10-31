@@ -1,6 +1,6 @@
 import React from 'react';
 import { Post } from '../../types/interfaces';
-import PostItem from '../PostItem/PostItem';
+import PostItem from '../Post/Post';
 
 import './Posts.scss';
 
