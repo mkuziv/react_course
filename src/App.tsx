@@ -4,6 +4,8 @@ import Main from './components/Main/Main';
 import filmPosts from './mock';
 import { Post } from './types/interfaces';
 import Footer from './components/Footer/Footer';
+import { filterPostsByGenre, filterPostsByName } from './utils/filterPosts';
+import { sortPostsByRating, sortPostsByDate, sortPostsByRuntime } from './utils/sortPost';
 
 import './App.scss';
 
@@ -12,26 +14,23 @@ const App = () => {
   const [posts, setPosts] = useState<Post[]>(filmPosts);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [active, setActive] = useState('all');
+  const [sort, setSort] = useState('date');
 
-  const filterPostsByName = (arrayOfPosts: Post[], query: string) => (
+  useEffect(() => {
+    if (sort === 'rating') setPosts(sortPostsByRating(filmPosts));
 
-    arrayOfPosts.filter((post: Post) => {
-      const postName = post.name.toLowerCase();
-      return postName.includes(query.toLowerCase());
-    })
-  );
+    if (sort === 'rantime') setPosts(sortPostsByRuntime(filmPosts));
 
-  const filterPostsByGenre = (arrayOfPosts: Post[], genre: string) => {
-    if (genre === 'all') return arrayOfPosts;
+    if (sort === 'date')setPosts(sortPostsByDate(filmPosts));
 
-    return arrayOfPosts.filter((post: Post) => {
-      const postName = post.genre.toLowerCase();
-      return postName.includes(genre);
-    });
-  };
+    setActive('all');
+    setSearchQuery('');
+  }, [sort]);
 
   useEffect(() => {
     setPosts(filterPostsByGenre(filmPosts, active));
+    setSearchQuery('');
+    setSort('date');
   }, [active]);
 
   useEffect(() => {
@@ -40,6 +39,8 @@ const App = () => {
     if (isSubmitted) {
       setPosts(filterPostsByName(filmPosts, searchQuery));
     }
+    setActive('all');
+    setSort('date');
 
     setIsSubmitted(false);
   }, [isSubmitted, searchQuery]);
@@ -51,7 +52,7 @@ const App = () => {
         setSearchQuery={setSearchQuery}
         setIsSubmitted={setIsSubmitted}
       />
-      <Main posts={posts} active={active} setActive={setActive} />
+      <Main posts={posts} active={active} setActive={setActive} sort={sort} setSort={setSort} />
       <Footer />
     </>
   );

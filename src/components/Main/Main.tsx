@@ -9,13 +9,17 @@ interface MainProp {
   posts: Post[];
   active: string;
   setActive: (value: string) => void;
+  sort: string;
+  setSort: (value: string) => void;
 }
 
-const Main = ({ posts, active, setActive }: MainProp) => (
+const Main = ({
+  posts, active, setActive, sort, setSort,
+}: MainProp) => (
   <main
     className="main"
   >
-    <MainMenu active={active} setActive={setActive} />
+    <MainMenu active={active} setActive={setActive} sort={sort} setSort={setSort} />
     <Posts posts={posts} />
   </main>
 );

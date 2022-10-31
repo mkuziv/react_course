@@ -5,13 +5,21 @@ import './MainMenu.scss';
 interface MainMenuProp {
   active: string;
   setActive: (value: string) => void;
+  sort: string;
+  setSort: (value: string) => void;
 }
 
-const MainMenu = ({ active, setActive }: MainMenuProp) => {
-  const menuItem = ['all', 'documentary', 'horror', 'crime'];
+const MainMenu = ({
+  active, setActive, sort, setSort,
+}: MainMenuProp) => {
+  const menuItem = ['all', 'documentary', 'comedy', 'horror', 'crime'];
 
   const handleClick = (e: React.MouseEvent) => {
     setActive((e.target as HTMLInputElement).innerHTML);
+  };
+
+  const handleChange = (e: React.ChangeEvent) => {
+    setSort((e.target as HTMLInputElement).value);
   };
 
   return (
@@ -23,8 +31,8 @@ const MainMenu = ({ active, setActive }: MainMenuProp) => {
       </ul>
       <div className="sort">
         SORT BY
-        <select name="sort" id="movie-select">
-          <option value="release date">release date</option>
+        <select name="sort" id="movie-select" value={sort} onChange={handleChange}>
+          <option value="date">release date</option>
           <option value="rating">rating</option>
           <option value="rantime">rantime</option>
         </select>
