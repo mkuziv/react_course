@@ -1,14 +1,14 @@
 import React from 'react';
-import { Post } from '../../types/interfaces';
+import { Post as IPost } from '../../types/interfaces';
 import Button from '../Button/Button';
 
 import './Post.scss';
 
 interface PostItemProp {
-  post: Post;
+  post: IPost;
 }
 
-const PostItem = ({ post }: PostItemProp) => {
+const Post = ({ post }: PostItemProp) => {
   const {
     name, year, genre,
   } = post;
@@ -20,6 +20,18 @@ const PostItem = ({ post }: PostItemProp) => {
       >
         img
         <Button content="" type="button" btn="round hov" />
+
+        <div className="dropdown">
+          <Button content="X" type="button" btn="img-btn-x" />
+          <ul>
+            <li>
+              <Button content="Edit" type="button" btn="img-btn" />
+            </li>
+            <li>
+              <Button content="Delete" type="button" btn="img-btn" />
+            </li>
+          </ul>
+        </div>
       </div>
       <div className="description">
         <div className="name">
@@ -32,4 +44,4 @@ const PostItem = ({ post }: PostItemProp) => {
   );
 };
 
-export default PostItem;
+export default Post;

@@ -24,6 +24,20 @@
   text-align: right;
 }
 
+.dropdown {
+  display: none;
+}
+
+.hov:focus ~ .dropdown {
+  display: inline-block;
+  background: $darkGray;
+  width: 50%;
+}
+
+.close-btn:focus ~ .dropdown {
+  display: none;
+}
+
 .description {
   margin-top: 20px;
   color: #919191;

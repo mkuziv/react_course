@@ -11,10 +11,10 @@
   text-transform: uppercase;
   margin-left: 14px;
   cursor: pointer;
-}
 
-.red-big:hover {
-  background: #cc444f;
+  &:hover {
+    background: #cc444f;
+  }
 }
 
 .grey {
@@ -29,9 +29,10 @@
   text-transform: uppercase;
   border: none;
   cursor: pointer;
-}
-.grey:hover {
-  background: #838383ad;
+
+  &:hover {
+    background: #838383ad;
+  }
 }
 
 .round {
@@ -43,12 +44,39 @@
   height: 36px;
   background: #2A202D;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.196596);
+
+  &::after {
+    position: absolute;
+    right: 8px;
+    top: 4px;
+    text-align: center;
+    content: '\2807';
+    font-size: 20px;
+  }
 }
-.round::after {
-  position: absolute;
-  right: 8px;
-  top: 4px;
-  text-align: center;
-  content: '\2807';
-  font-size: 20px;
+
+.img-btn {
+  @include text(16px, 500, 20px);
+  color: $white;
+  background: $darkGray;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 16px 23px;
+
+  &:hover {
+    background:  $red;
+  }
+}
+
+.img-btn-x {
+  @include text(16px, 500, 20px);
+  color: $white;
+  background: $darkGray;
+  border: none;
+  padding: 1px 2px;
+
+  &:hover {
+    background:  $red;
+  }
 }
