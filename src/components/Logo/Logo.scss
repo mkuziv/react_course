@@ -2,6 +2,10 @@
 @import '../../styles/mixin.scss';
 
 .logo {
-  @include text(20px, 400, 24px);
+  margin: 0;
+  a {
+    @include text(20px, 400, 24px);
   color: $red;
+  text-decoration: none;
+  }  
 }
