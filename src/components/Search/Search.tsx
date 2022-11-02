@@ -3,6 +3,7 @@ import SearchInput from './SearchInput/SearchInput';
 
 import Button from '../Button/Button';
 import './Search.scss';
+import Title from '../Title/Title';
 
 interface SearchProp {
   searchQuery: string;
@@ -17,10 +18,13 @@ const Search = ({ searchQuery, setSearchQuery, setIsSubmitted }: SearchProp) => 
   };
 
   return (
-    <form className="search-form" onSubmit={handleSubmit}>
-      <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <Button type="submit" content="search" btn="red-big" />
-    </form>
+    <section className="search">
+      <Title name="FIND YOUR MOVIE" />
+      <form className="search-form" onSubmit={handleSubmit}>
+        <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <Button type="submit" content="search" btn="red-big" />
+      </form>
+    </section>
   );
 };
 

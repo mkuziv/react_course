@@ -8,6 +8,7 @@ import { filterPostsByGenre, filterPostsByName } from './utils/filterPosts';
 import sortPosts from './utils/sortPost';
 
 import './App.scss';
+import Search from './components/Search/Search';
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -21,7 +22,7 @@ const App = () => {
 
     if (sort === 'runtime') setPosts(sortPosts(filmPosts, sort));
 
-    if (sort === 'year')setPosts(sortPosts(filmPosts, sort));
+    if (sort === 'year') setPosts(sortPosts(filmPosts, sort));
   }, [sort]);
 
   useEffect(() => {
@@ -40,7 +41,8 @@ const App = () => {
 
   return (
     <>
-      <Header
+      <Header />
+      <Search
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         setIsSubmitted={setIsSubmitted}
