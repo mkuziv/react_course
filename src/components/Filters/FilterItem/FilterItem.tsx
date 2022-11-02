@@ -3,10 +3,10 @@ import './FilterItem.scss';
 
 interface MenuItemProp {
   title: string;
-  handleClick: (e: React.MouseEvent) => void;
+  handleClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   active: string;
 }
-const MenuItem = ({ title, handleClick, active }: MenuItemProp) => (
+const FilterItem = ({ title, handleClick, active }: MenuItemProp) => (
   <button
     type="button"
     className={`menu-item ${(active === title ? 'active' : '')}`}
@@ -16,4 +16,4 @@ const MenuItem = ({ title, handleClick, active }: MenuItemProp) => (
   </button>
 );
 
-export default MenuItem;
+export default FilterItem;

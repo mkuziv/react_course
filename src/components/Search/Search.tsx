@@ -19,7 +19,7 @@ const Search = ({ searchQuery, setSearchQuery, setIsSubmitted }: SearchProp) => 
 
   return (
     <section className="search">
-      <Title name="FIND YOUR MOVIE" />
+      <Title className="h2" name="FIND YOUR MOVIE" />
       <form className="search-form" onSubmit={handleSubmit}>
         <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <Button type="submit" content="search" btn="red-big" />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Post as IPost } from '../../types/interfaces';
 import Button from '../Button/Button';
+import Title from '../Title/Title';
 
 import './Post.scss';
 
@@ -35,7 +36,7 @@ const Post = ({ post }: PostItemProp) => {
       </div>
       <div className="description">
         <div className="name">
-          <h3>{name}</h3>
+          <Title name={name} className="h3" />
           <span className="year">{year}</span>
         </div>
         {genre}

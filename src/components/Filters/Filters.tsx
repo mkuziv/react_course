@@ -14,12 +14,12 @@ const Filters = ({
 }: FiltersProp) => {
   const filterItems = ['all', 'documentary', 'comedy', 'horror', 'crime'];
 
-  const handleClick = (e: React.MouseEvent) => {
-    setActive((e.target as HTMLInputElement).innerHTML);
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    setActive((e.target as HTMLButtonElement).innerHTML);
   };
 
-  const handleChange = (e: React.ChangeEvent) => {
-    setSort((e.target as HTMLInputElement).value);
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSort(e.target.value);
   };
 
   return (
