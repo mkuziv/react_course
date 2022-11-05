@@ -1,9 +1,8 @@
 import React from 'react';
 import SearchInput from './SearchInput/SearchInput';
-
 import Button from '../Button/Button';
+
 import './Search.scss';
-import Title from '../Title/Title';
 
 interface SearchProp {
   searchQuery: string;
@@ -19,11 +18,14 @@ const Search = ({ searchQuery, setSearchQuery, setIsSubmitted }: SearchProp) => 
 
   return (
     <section className="search">
-      <Title className="h2" name="FIND YOUR MOVIE" />
-      <form className="search-form" onSubmit={handleSubmit}>
-        <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        <Button type="submit" content="search" btn="red-big" />
-      </form>
+      <div className="wrapper">
+        <h2 className="h2">FIND YOUR MOVIE</h2>
+        <br />
+        <form className="search-form" onSubmit={handleSubmit}>
+          <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+          <Button type="submit" content="search" btn="btn btn-big btn-red" />
+        </form>
+      </div>
     </section>
   );
 };

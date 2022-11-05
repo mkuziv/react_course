@@ -6,6 +6,7 @@ import { Post } from './types/interfaces';
 import Footer from './components/Footer/Footer';
 import { filterPostsByGenre, filterPostsByName } from './utils/filterPosts';
 import sortPosts from './utils/sortPost';
+import { SortingValue } from './types/types';
 
 import './App.scss';
 import Search from './components/Search/Search';
@@ -15,14 +16,10 @@ const App = () => {
   const [posts, setPosts] = useState<Post[]>(filmPosts);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [active, setActive] = useState('all');
-  const [sort, setSort] = useState('year');
+  const [sort, setSort] = useState<SortingValue>('year');
 
   useEffect(() => {
-    if (sort === 'rating') setPosts(sortPosts(filmPosts, sort));
-
-    if (sort === 'runtime') setPosts(sortPosts(filmPosts, sort));
-
-    if (sort === 'year') setPosts(sortPosts(filmPosts, sort));
+    setPosts(sortPosts(filmPosts, sort));
   }, [sort]);
 
   useEffect(() => {

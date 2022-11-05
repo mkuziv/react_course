@@ -2,9 +2,8 @@
 @import '../../styles/mixin.scss';
 
 .posts-section {
-  width: 100%;
   margin: 0 auto;
-  padding: 20px 58px;
+  padding: 20px 0;
 
   span {    
     @include text(20px, 400, 24px);

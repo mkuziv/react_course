@@ -6,9 +6,9 @@ import './Header.scss';
 
 const Header = () => (
   <header className="header">
-    <div className="wrapper">
+    <div className="wrapper container">
       <Logo />
-      <Button type="button" content=" + add movie" btn="grey" />
+      <Button type="button" content=" + add movie" btn="btn btn-gray btn-small" />
     </div>
   </header>
 );

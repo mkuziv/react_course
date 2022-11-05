@@ -2,6 +2,7 @@ import React from 'react';
 import Filters from '../Filters/Filters';
 import Posts from '../Posts/Posts';
 import { Post } from '../../types/interfaces';
+import { SortingValue } from '../../types/types';
 
 import './Main.scss';
 
@@ -10,7 +11,7 @@ interface MainProp {
   active: string;
   setActive: (value: string) => void;
   sort: string;
-  setSort: (value: string) => void;
+  setSort: (value: SortingValue) => void;
 }
 
 const Main = ({
@@ -19,8 +20,10 @@ const Main = ({
   <main
     className="main"
   >
-    <Filters active={active} setActive={setActive} sort={sort} setSort={setSort} />
-    <Posts posts={posts} />
+    <div className="container">
+      <Filters active={active} setActive={setActive} sort={sort} setSort={setSort} />
+      <Posts posts={posts} />
+    </div>
   </main>
 );
 

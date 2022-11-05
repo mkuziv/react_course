@@ -1,37 +1,36 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixin.scss';
 
-.menu-wrapper {
+.filters-wrapper {
   display: flex;
   justify-content: space-between;
   background: $darkGray;
   padding: 20px 0;
-  width: 90%;
   margin: 5px auto;
   border-bottom: 3px solid #424242;
-}
 
-.menu {
-  display: flex;
-  list-style-type: none;
-  width: 50%;
-  margin: 0;
-  padding: 0;
-}
+  .filters {
+    display: flex;
+    list-style-type: none;
+    width: 50%;
+    margin: 0;
+    padding: 0;
+  }
 
-.sort {
-  @include text(16px, 400, 20px);
-  color: $white;
-  letter-spacing: 0.888889px;
-  text-transform: uppercase;
-  opacity: 0.6;
-
-  #movie-select {
+  .sort {
+    @include text(16px, 400, 20px);
     color: $white;
-    background-color: $darkGray;
+    letter-spacing: 0.888889px;
     text-transform: uppercase;
-    border: none;
-    font-size: 16px;
-    margin-left: 30px;
+    opacity: 0.6;
+  
+    #movie-select {
+      color: $white;
+      background-color: $darkGray;
+      text-transform: uppercase;
+      border: none;
+      font-size: 16px;
+      margin-left: 30px;
+    }
   }
 }

@@ -1,6 +1,5 @@
 import { Post } from '../types/interfaces';
-
-type SortingValue = keyof Post;
+import { SortingValue } from '../types/types';
 
 const sortPosts = (arrayOfPosts: Post[], valueOfSorting: SortingValue) => (
   arrayOfPosts.sort((a: Post, b: Post) => Number(b[valueOfSorting]) - Number(a[valueOfSorting]))

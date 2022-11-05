@@ -1,4 +1,5 @@
 import React from 'react';
+import { SortingValue } from '../../types/types';
 import FilterItem from './FilterItem/FilterItem';
 import './Filters.scss';
 
@@ -6,7 +7,7 @@ interface FiltersProp {
   active: string;
   setActive: (value: string) => void;
   sort: string;
-  setSort: (value: string) => void;
+  setSort: (value: SortingValue) => void;
 }
 
 const Filters = ({
@@ -14,20 +15,20 @@ const Filters = ({
 }: FiltersProp) => {
   const filterItems = ['all', 'documentary', 'comedy', 'horror', 'crime'];
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    setActive((e.target as HTMLButtonElement).innerHTML);
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setActive(e.currentTarget.innerHTML);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSort(e.target.value);
+    setSort(e.target.value as SortingValue);
   };
 
   return (
-    <div className="menu-wrapper">
-      <ul className="menu">
+    <div className="filters-wrapper">
+      <ul className="filters">
         {filterItems.map((item) => (
-          <li>
-            <FilterItem handleClick={handleClick} key={`${item}`} title={item} active={active} />
+          <li key={`${item}`}>
+            <FilterItem handleClick={handleClick} title={item} active={active} />
           </li>
         ))}
       </ul>

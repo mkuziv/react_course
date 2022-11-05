@@ -4,7 +4,7 @@ import './Logo.scss';
 
 const Logo = () => (
   <h1 className="logo">
-    <a href="http://localhost:8080/">
+    <a href="/">
       <strong>netflix</strong>
       roulette
     </a>
