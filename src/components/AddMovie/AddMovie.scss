@@ -1,0 +1,74 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
+.add-movie {
+  max-width: 970px;
+  margin: 0 60px;
+
+  .h3 {
+    font-style: normal;
+    @include text(40px, 300, 49px);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  
+    color: $white;
+  }
+
+  input,
+  select,
+  textarea {
+    background: $middleGray;
+    margin-top: 12px;
+    width: 100%;
+    @include text(20px, 400, 24px);
+    color: $white;
+    margin-bottom: 30px;
+    border: none;
+  }
+
+  input,
+  select {
+    height: 57px;
+  }
+
+  input[type="date"] {
+    color-scheme: dark;
+  }
+
+  textarea {
+    height: 190px;
+  }
+
+  label {
+    @include text(16px, 600, 20px);
+    color: $red;
+    text-transform: uppercase;
+  }
+
+  .form {
+    width: 100%;
+    margin: 0;
+
+    .main {
+      display: flex;
+
+      .left-side {
+        width: 60%;
+      }
+
+      .right-side {
+        margin-left: 30px;
+        width: 40%;
+      }
+    }
+  }
+
+  &__button {
+    text-align: right;
+    margin: 76px 0 60px 0;
+
+    button:first-child {
+      margin-right: 10px;
+    }
+  }
+}
