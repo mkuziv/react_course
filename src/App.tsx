@@ -1,31 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import Search from './components/Search/Search';
-import Posts from './components/Posts/Posts';
-import Title from './components/Title/Title';
-import ToggleMenu from './components/ToggleMenu/ToggleMenu';
-import { Post } from './types/interfaces';
+import Header from './components/Header/Header';
+import Main from './components/Main/Main';
 import filmPosts from './mock';
+import { Post } from './types/interfaces';
+import Footer from './components/Footer/Footer';
+import { filterPostsByGenre, filterPostsByName } from './utils/filterPosts';
+import sortPosts from './utils/sortPost';
+import { SortingValue } from './types/types';
 
 import './App.scss';
+import Search from './components/Search/Search';
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [posts, setPosts] = useState<Post[]>(filmPosts);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const filterPosts = (arrayOfPosts: Post[], query: string) => (
-
-    arrayOfPosts.filter((post) => {
-      const postName = post.name.toLowerCase();
-      return postName.includes(query.toLowerCase());
-    })
-  );
+  const [active, setActive] = useState('all');
+  const [sort, setSort] = useState<SortingValue>('year');
 
   useEffect(() => {
-    if (!searchQuery) setPosts(filterPosts(filmPosts, searchQuery));
+    setPosts(sortPosts(filmPosts, sort));
+  }, [sort]);
+
+  useEffect(() => {
+    setPosts(filterPostsByGenre(filmPosts, active));
+  }, [active]);
+
+  useEffect(() => {
+    if (!searchQuery) setPosts(filterPostsByName(filmPosts, searchQuery));
 
     if (isSubmitted) {
-      setPosts(filterPosts(filmPosts, searchQuery));
+      setPosts(filterPostsByName(filmPosts, searchQuery));
     }
 
     setIsSubmitted(false);
@@ -33,14 +38,14 @@ const App = () => {
 
   return (
     <>
-      <Title name="World" />
-      <ToggleMenu />
+      <Header />
       <Search
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         setIsSubmitted={setIsSubmitted}
       />
-      <Posts posts={posts} />
+      <Main posts={posts} active={active} setActive={setActive} sort={sort} setSort={setSort} />
+      <Footer />
     </>
   );
 };

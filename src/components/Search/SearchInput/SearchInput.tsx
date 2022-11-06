@@ -7,8 +7,8 @@ interface SearchInputProp {
 }
 
 const SearchInput = ({ searchQuery, setSearchQuery }: SearchInputProp) => {
-  const handleChange = (event: React.ChangeEvent) => {
-    setSearchQuery((event.target as HTMLInputElement).value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
   };
 
   return (

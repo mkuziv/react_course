@@ -1,5 +1,6 @@
 import React from 'react';
 import { Post } from '../../types/interfaces';
+import PostItem from '../Post/Post';
 
 import './Posts.scss';
 
@@ -8,11 +9,19 @@ interface PostsProp {
 }
 
 const Posts = ({ posts }: PostsProp) => (
-  <ul className="posts">
-    {posts.map((post: Post) => (
-      <li key={post.id}>{post.name}</li>
-    ))}
-  </ul>
+  <section className="posts-section">
+    <span>
+      <b>{`${posts.length} `}</b>
+      movie found
+    </span>
+    <ul className="posts">
+      {posts.map((post: Post) => (
+        <li key={post.id}>
+          <PostItem post={post} />
+        </li>
+      ))}
+    </ul>
+  </section>
 );
 
 export default Posts;

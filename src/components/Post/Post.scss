@@ -1,0 +1,116 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
+.movie {
+  width: 327px;
+  margin: 20px 0;
+}
+
+.img {
+  position: relative;
+  height: 462px;
+  width: 100%;
+  background: url('../../images/avengers_war_of_infinity_bg.png');
+  background-size: contain;
+  text-align: right;
+  padding: 14px;
+
+  .hov {
+    display: none;
+  }
+
+  &:hover > .hov {
+    display: inline-block;
+    text-align: right;
+    &:focus ~ .dropdown {
+      display: inline-block;
+      background: $darkGray;
+      width: 50%;
+      position: absolute;
+      right: 15px;
+    
+      ul {
+        padding: 0;
+      }
+    }
+  }
+
+  .btn-round {
+    position: relative;
+    border-radius: 50%;
+    border: none;
+    width: 36px;
+    height: 36px;
+    color: #2A202D;
+    background: #2A202D;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.196596);
+  
+    &::after {
+      color: $white;
+      position: absolute;
+      right: 8px;
+      top: 4px;
+      text-align: center;
+      content: '\2807';
+      font-size: 20px;
+    }
+  }
+
+  .dropdown-btn {
+    @include text(16px, 500, 20px);
+    color: $white;
+    background: $darkGray;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 16px 23px;
+  
+    &:hover {
+      background:  $red;
+    }
+  }
+
+  .dropdown-btn-x {
+    @include text(16px, 500, 20px);
+    color: $white;
+    background: $darkGray;
+    border: none;
+    padding: 1px 2px;
+  
+    &:hover {
+      background:  $red;
+    }
+  }
+
+  .dropdown {
+    display: none;
+  }
+}
+
+.description {
+  margin-top: 20px;
+  color: #919191;
+  font-size: 14px;
+
+  .name {
+    display: flex;
+    justify-content: space-between;
+
+    .h3 {
+      @include text(18px, 500, 22px);
+      color: $white;
+      text-transform: capitalize;
+      opacity: 0.7;
+      margin: 0;
+    }
+
+    .year {
+      font-size: 14px;
+      line-height: 17px;
+      padding: 4px 8px;
+      border: 1px solid #979797;
+      border-radius: 4px;
+      opacity: 0.7;
+    }
+  }
+}

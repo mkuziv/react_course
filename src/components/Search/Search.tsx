@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchButton from './SearchButton/SearchButton';
 import SearchInput from './SearchInput/SearchInput';
+import Button from '../Button/Button';
 
 import './Search.scss';
 
@@ -17,10 +17,16 @@ const Search = ({ searchQuery, setSearchQuery, setIsSubmitted }: SearchProp) => 
   };
 
   return (
-    <form className="search-form" onSubmit={handleSubmit}>
-      <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <SearchButton />
-    </form>
+    <section className="search">
+      <div className="wrapper">
+        <h2 className="h2">FIND YOUR MOVIE</h2>
+        <br />
+        <form className="search-form" onSubmit={handleSubmit}>
+          <SearchInput searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+          <Button type="submit" content="search" btn="btn btn-big btn-red" />
+        </form>
+      </div>
+    </section>
   );
 };
 

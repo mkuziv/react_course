@@ -1,6 +1,16 @@
+@import './styles/variables.scss';
+
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
   font-family: 'Roboto', sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: $lightGray;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }

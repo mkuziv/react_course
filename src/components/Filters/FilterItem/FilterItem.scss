@@ -1,0 +1,26 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixin.scss';
+
+.menu-item {
+  @include text(16px, 500, 20px);
+  color: $white;
+  position: relative;
+  margin-right: 30px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  background: $darkGray;
+  padding: 0;
+}
+
+.menu-item:hover {
+  color: #D42828;
+}
+
+.active::after {
+    position: relative;
+    content: '';
+    top: 23px;
+    border-bottom: 3px solid #D42828;
+    display: block;
+}

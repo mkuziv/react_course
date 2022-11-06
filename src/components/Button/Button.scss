@@ -1,0 +1,38 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
+.btn {
+  border-radius: 4px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn-red {
+  color: $white;
+  background: $red;
+  border: none;
+  @include text(20px, 500, 24px);
+
+  &:hover {
+    background: #cc444f;
+  }
+}
+
+.btn-gray {
+  color: $red;
+  background: #606060ad;
+  border: none;
+  @include text(20px, 600, 24px);
+
+  &:hover {
+    background: #838383ad;
+  }
+}
+
+.btn-big {
+  padding: 16px 74px;
+}
+
+.btn-small{
+  padding: 11px 18px;
+}

@@ -1,8 +1,23 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
+.posts-section {
+  margin: 0 auto;
+  padding: 20px 0;
+
+  span {    
+    @include text(20px, 400, 24px);
+    color: $white;
+  }
+}
+
 .posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   list-style-type: none;
-  background: #CDCDCD;
-  padding: 20px;
-  width: 960px;
+  background: $darkGray;
   margin: 5px auto;
-  border-radius: 5px;
+  border-radius: 5px;  
+  padding: 0;
 }
