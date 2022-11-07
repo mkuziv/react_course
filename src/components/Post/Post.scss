@@ -23,7 +23,7 @@
     display: inline-block;
     text-align: right;
     &:focus ~ .dropdown {
-      display: inline-block;
+      opacity: 1;
       background: $darkGray;
       width: 50%;
       position: absolute;
@@ -83,7 +83,7 @@
   }
 
   .dropdown {
-    display: none;
+    opacity: 0;
   }
 }
 

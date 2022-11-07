@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../Context';
 import { Post as IPost } from '../../types/interfaces';
 
 import './Post.scss';
@@ -8,9 +9,20 @@ interface PostItemProp {
 }
 
 const Post = ({ post }: PostItemProp) => {
+  const { toggleOpen, toggleModal } = useContext(AppContext);
   const {
     name, year, genre,
   } = post;
+
+  const handleDeleteClick = () => {
+    toggleModal('delete');
+    toggleOpen(true);
+  };
+
+  const handleEditClick = () => {
+    toggleModal('edit');
+    toggleOpen(true);
+  };
 
   return (
     <article className="movie">
@@ -22,10 +34,10 @@ const Post = ({ post }: PostItemProp) => {
           <button type="button" className="dropdown-btn-x">X</button>
           <ul>
             <li>
-              <button type="button" className="dropdown-btn">Edit</button>
+              <button type="button" className="dropdown-btn" onClick={handleEditClick}>Edit</button>
             </li>
             <li>
-              <button type="button" className="dropdown-btn">Delete</button>
+              <button type="button" className="dropdown-btn" onClick={handleDeleteClick}>Delete</button>
             </li>
           </ul>
         </div>

@@ -7,9 +7,12 @@ import Footer from './components/Footer/Footer';
 import { filterPostsByGenre, filterPostsByName } from './utils/filterPosts';
 import sortPosts from './utils/sortPost';
 import { SortingValue } from './types/types';
+import Search from './components/Search/Search';
+import Modal from './components/Modal/Modal';
+import { AppProvider } from './Context';
 
 import './App.scss';
-import Search from './components/Search/Search';
+import ModalManager from './ModalManager/ModalManager';
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -37,16 +40,21 @@ const App = () => {
   }, [isSubmitted, searchQuery]);
 
   return (
-    <>
-      <Header />
-      <Search
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        setIsSubmitted={setIsSubmitted}
-      />
-      <Main posts={posts} active={active} setActive={setActive} sort={sort} setSort={setSort} />
-      <Footer />
-    </>
+    <AppProvider>
+      <>
+        <Header />
+        <Search
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          setIsSubmitted={setIsSubmitted}
+        />
+        <Main posts={posts} active={active} setActive={setActive} sort={sort} setSort={setSort} />
+        <Footer />
+        <Modal>
+          <ModalManager />
+        </Modal>
+      </>
+    </AppProvider>
   );
 };
 
