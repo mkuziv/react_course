@@ -9,9 +9,9 @@ interface PostItemProp {
 }
 
 const Post = ({ post }: PostItemProp) => {
-  const { toggleOpen, toggleModal } = useContext(AppContext);
+  const { toggleOpen, toggleModal, setEditedPostVal } = useContext(AppContext);
   const {
-    name, year, genre,
+    id, name, year, genre, imgName, rating, runtime,
   } = post;
 
   const handleDeleteClick = () => {
@@ -22,6 +22,15 @@ const Post = ({ post }: PostItemProp) => {
   const handleEditClick = () => {
     toggleModal('edit');
     toggleOpen(true);
+    setEditedPostVal({
+      id,
+      name,
+      year,
+      genre,
+      imgName,
+      rating,
+      runtime,
+    });
   };
 
   return (
