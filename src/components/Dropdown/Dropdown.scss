@@ -1,0 +1,68 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
+.btn-round {
+  position: relative;
+  border-radius: 50%;
+  border: none;
+  width: 36px;
+  height: 36px;
+  color: #2A202D;
+  background: #2A202D;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.196596);
+
+  &::after {
+    color: $white;
+    position: absolute;
+    right: 8px;
+    top: 4px;
+    text-align: center;
+    content: '\2807';
+    font-size: 20px;
+  }
+}
+
+.dropdown {
+  background: $darkGray;
+  width: 50%;
+  position: absolute;
+  right: 15px;
+
+  ul {
+    padding: 0;
+  }
+
+  .dropdown-btn {
+    @include text(16px, 500, 20px);
+    color: $white;
+    background: $darkGray;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 16px 23px;
+
+    &:hover {
+      background: $red;
+    }
+  }
+  .dropdown-btn-x {
+    color: transparent;
+    background: $darkGray;
+    border: none;
+    padding: 1px 2px;
+    margin-top: 3px;
+    margin-right: 3px;
+  
+    &::after {
+      color: $white;
+      text-align: center;
+      content: '\2A09';
+      font-size: 20px;
+      cursor: pointer;
+    }
+  }
+  
+  .dropdown-btn-x:hover::after {
+    color: $red;
+  }
+}

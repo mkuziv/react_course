@@ -74,7 +74,7 @@ const AddMovie = () => {
                 <Select
                   closeMenuOnSelect={false}
                   components={animatedComponents}
-                  defaultValue={[genreOptions[1], genreOptions[2]]}
+                  defaultValue={isEditedPost ? [genreOptions[1], genreOptions[2]] : []}
                   isMulti
                   options={genreOptions}
                   styles={customStyles}
