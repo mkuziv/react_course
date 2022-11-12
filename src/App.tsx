@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
@@ -10,6 +10,7 @@ import { Post } from './types/interfaces';
 import { SortingValue } from './types/types';
 import { filterPostsByGenre, filterPostsByName } from './utils/filterPosts';
 import sortPosts from './utils/sortPost';
+import { AppContext } from './Context';
 
 import './App.scss';
 
@@ -19,6 +20,7 @@ const App = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [active, setActive] = useState('all');
   const [sort, setSort] = useState<SortingValue>('year');
+  const { modal } = useContext(AppContext);
 
   useEffect(() => {
     setPosts(sortPosts(filmPosts, sort));
@@ -48,9 +50,11 @@ const App = () => {
       />
       <Main posts={posts} active={active} setActive={setActive} sort={sort} setSort={setSort} />
       <Footer />
-      <Modal>
-        <ModalManager />
-      </Modal>
+      { modal && (
+        <Modal>
+          <ModalManager />
+        </Modal>
+      )}
     </>
   );
 };

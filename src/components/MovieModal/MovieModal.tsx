@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
 import React, { useContext } from 'react';
-import makeAnimated from 'react-select/animated';
 import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 import { AppContext } from '../../Context';
 import Button from '../Button/Button';
+import ModalValue from '../../types/enums';
 
 import './MovieModal.scss';
 
@@ -36,7 +37,7 @@ export const genreOptions: readonly GenreOption[] = [
 const MovieModal = () => {
   const { modal, editedPost } = useContext(AppContext);
   const animatedComponents = makeAnimated();
-  const isEditedPost = modal === 'edit';
+  const isEditedPost = modal === ModalValue.EDIT;
 
   let movieDate: Date;
 

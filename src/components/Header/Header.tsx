@@ -1,15 +1,16 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../Context';
+import ModalValue from '../../types/enums';
 import Button from '../Button/Button';
 import Logo from '../Logo/Logo';
 
 import './Header.scss';
 
 const Header = () => {
-  const { toggleModal, toggleOpen } = useContext(AppContext);
+  const { toggleModalType } = useContext(AppContext);
+
   const handleClick = () => {
-    toggleModal('add');
-    toggleOpen(true);
+    toggleModalType(ModalValue.ADD);
   };
 
   return (

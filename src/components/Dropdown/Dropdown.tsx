@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../../Context';
 import { Post } from '../../types/interfaces';
+import ModalValue from '../../types/enums';
 
 import './Dropdown.scss';
 
@@ -9,17 +10,16 @@ interface DropdownProps {
 }
 
 const Dropdown = ({ post }: DropdownProps) => {
-  const { toggleOpen, toggleModal, setEditedPostVal } = useContext(AppContext);
+  const { toggleModalType, setEditedPostVal } = useContext(AppContext);
   const [isDropdownShown, setIsDropdownShown] = useState(false);
+
   const handleDeleteClick = () => {
-    toggleModal('delete');
-    toggleOpen(true);
+    toggleModalType(ModalValue.DELETE);
     setIsDropdownShown(!isDropdownShown);
   };
 
   const handleEditClick = () => {
-    toggleModal('edit');
-    toggleOpen(true);
+    toggleModalType(ModalValue.EDIT);
     setEditedPostVal(post);
     setIsDropdownShown(!isDropdownShown);
   };

@@ -8,10 +8,10 @@ interface ModalProps {
 }
 
 const Modal = ({ children }: ModalProps) => {
-  const { isModalWindowShown, toggleOpen } = useContext(AppContext);
+  const { toggleModalType } = useContext(AppContext);
 
   const handleClick = () => {
-    toggleOpen(false);
+    toggleModalType(null);
   };
 
   const modal = (
@@ -22,8 +22,6 @@ const Modal = ({ children }: ModalProps) => {
       </div>
     </div>
   );
-
-  if (!isModalWindowShown) return null;
 
   return ReactDOM.createPortal(modal, document.body);
 };
