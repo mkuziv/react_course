@@ -14,8 +14,7 @@ const Modal = ({ children }: ModalProps) => {
     toggleOpen(false);
   };
 
-  const modalRoot = document.getElementById('modal');
-  const div = (
+  const modal = (
     <div className="modal-backdrop">
       <div className="modal-window">
         <button type="button" className="btn-x" onClick={handleClick}>x</button>
@@ -26,6 +25,6 @@ const Modal = ({ children }: ModalProps) => {
 
   if (!isModalWindowShown) return null;
 
-  return ReactDOM.createPortal(div, modalRoot);
+  return ReactDOM.createPortal(modal, document.body);
 };
 export default Modal;

@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
+import Modal from './components/Modal/Modal';
+import ModalManager from './components/ModalManager/ModalManager';
+import Search from './components/Search/Search';
 import filmPosts from './mock';
 import { Post } from './types/interfaces';
-import Footer from './components/Footer/Footer';
+import { SortingValue } from './types/types';
 import { filterPostsByGenre, filterPostsByName } from './utils/filterPosts';
 import sortPosts from './utils/sortPost';
-import { SortingValue } from './types/types';
-import Search from './components/Search/Search';
-import Modal from './components/Modal/Modal';
-import { AppProvider } from './Context';
 
 import './App.scss';
-import ModalManager from './components/ModalManager/ModalManager';
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -40,21 +39,19 @@ const App = () => {
   }, [isSubmitted, searchQuery]);
 
   return (
-    <AppProvider>
-      <>
-        <Header />
-        <Search
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          setIsSubmitted={setIsSubmitted}
-        />
-        <Main posts={posts} active={active} setActive={setActive} sort={sort} setSort={setSort} />
-        <Footer />
-        <Modal>
-          <ModalManager />
-        </Modal>
-      </>
-    </AppProvider>
+    <>
+      <Header />
+      <Search
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        setIsSubmitted={setIsSubmitted}
+      />
+      <Main posts={posts} active={active} setActive={setActive} sort={sort} setSort={setSort} />
+      <Footer />
+      <Modal>
+        <ModalManager />
+      </Modal>
+    </>
   );
 };
 
