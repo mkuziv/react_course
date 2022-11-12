@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
-import AddMovie from '../components/AddMovie/AddMovie';
-import DeleteMovie from '../components/DeleteMovie/DeleteMovie';
-import { AppContext } from '../Context';
+import MovieModal from '../MovieModal/MovieModal';
+import DeleteMovie from '../DeleteMovie/DeleteMovie';
+import { AppContext } from '../../Context';
 
 const ModalManager = () => {
   const { modal } = useContext(AppContext);
   switch (modal) {
     case 'add':
     case 'edit':
-      return <AddMovie />;
+      return <MovieModal />;
     default:
       return <DeleteMovie />;
   }

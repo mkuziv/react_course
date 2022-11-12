@@ -12,7 +12,7 @@ import Modal from './components/Modal/Modal';
 import { AppProvider } from './Context';
 
 import './App.scss';
-import ModalManager from './ModalManager/ModalManager';
+import ModalManager from './components/ModalManager/ModalManager';
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');

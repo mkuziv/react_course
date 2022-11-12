@@ -6,7 +6,7 @@ import Select from 'react-select';
 import { AppContext } from '../../Context';
 import Button from '../Button/Button';
 
-import './AddMovie.scss';
+import './MovieModal.scss';
 
 export interface GenreOption {
   readonly value: string;
@@ -33,7 +33,7 @@ export const genreOptions: readonly GenreOption[] = [
   { value: 'Crime', label: 'Crime' },
 ];
 
-const AddMovie = () => {
+const MovieModal = () => {
   const { modal, editedPost } = useContext(AppContext);
   const animatedComponents = makeAnimated();
   const isEditedPost = modal === 'edit';
@@ -47,7 +47,7 @@ const AddMovie = () => {
   const defaultValue = isEditedPost ? movieDate.toISOString().split('T')[0] : today.toISOString().split('T')[0];
 
   return (
-    <section className="add-movie">
+    <section className="movie-modal">
       <h3 className="h3">{isEditedPost ? 'edit movie' : 'add movie'}</h3>
       <form action="" className="form">
         <div className="main">
@@ -115,7 +115,7 @@ const AddMovie = () => {
           </textarea>
         </label>
       </form>
-      <div className="add-movie__button">
+      <div className="movie-modal__button">
         <Button content="reset" btn="btn bnt-outlined btn-middle" type="button" />
         <Button content="submit" btn="btn btn-red btn-middle" type="submit" />
       </div>
@@ -123,4 +123,4 @@ const AddMovie = () => {
   );
 };
 
-export default AddMovie;
+export default MovieModal;
