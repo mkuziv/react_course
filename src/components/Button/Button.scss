@@ -18,36 +18,6 @@
   }
 }
 
-.btn-gray {
-  color: $red;
-  background: #606060ad;
-  border: none;
-  @include text(20px, 600, 24px);
-
-  &:hover {
-    background: #838383ad;
-  }
-}
-
-.bnt-transparent {
-  border: 1.5px solid $red;
-  color: $red;
-  background: transparent;  
-  @include text(20px, 500, 24px);
-
-  &:hover {
-    opacity: 0.5; 
-  }
-}
-
-.btn-big {
-  padding: 16px 74px;
-}
-
-.btn-middle{
+.btn-middle {
   padding: 16px 57px;
-}
-
-.btn-small{
-  padding: 11px 18px;
 }

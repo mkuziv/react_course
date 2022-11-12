@@ -54,12 +54,10 @@ const AddMovie = () => {
           <div className="left-side">
             <label htmlFor="title">
               title
-              <br />
               <input type="text" id="title" value={isEditedPost ? `${editedPost.name}` : ''} />
             </label>
             <label htmlFor="url">
               movie url
-              <br />
               <input
                 type="text"
                 id="url"
@@ -69,7 +67,6 @@ const AddMovie = () => {
             </label>
             <label htmlFor="genre">
               genre
-              <br />
               <div id="genre">
                 <Select
                   closeMenuOnSelect={false}
@@ -85,7 +82,6 @@ const AddMovie = () => {
           <div className="right-side">
             <label htmlFor="date">
               release date
-              <br />
               <input
                 type="date"
                 id="date"
@@ -99,7 +95,6 @@ const AddMovie = () => {
             </label>
             <label htmlFor="runtime">
               runtime
-              <br />
               <input
                 type="number"
                 id="runtime"
@@ -121,7 +116,7 @@ const AddMovie = () => {
         </label>
       </form>
       <div className="add-movie__button">
-        <Button content="reset" btn="btn bnt-transparent btn-middle" type="button" />
+        <Button content="reset" btn="btn bnt-outlined btn-middle" type="button" />
         <Button content="submit" btn="btn btn-red btn-middle" type="submit" />
       </div>
     </section>

@@ -27,6 +27,10 @@
     .search-form {
       display: flex;
       justify-content: space-between;
+
+      .btn-big {
+        padding: 16px 74px;
+      }
     }
   }
 }

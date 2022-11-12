@@ -11,7 +11,6 @@ const DeleteMovie = () => (
       <Button content="confirm" btn="btn btn-red btn-middle" type="button" />
     </div>
   </section>
-
 );
 
 export default DeleteMovie;

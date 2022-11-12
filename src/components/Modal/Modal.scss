@@ -38,9 +38,9 @@
       font-size: 20px;
       cursor: pointer;
     }
-  }
-  
-  .btn-x:hover::after {
-    color: $red;
+
+    &:hover::after {
+      color: $red;
+    }
   }
 }
