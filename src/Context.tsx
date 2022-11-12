@@ -10,7 +10,7 @@ interface IAppContext {
 }
 
 interface ChildrenProps {
-  children: React.ReactNode;
+  children: JSX.Element;
 }
 
 type ModalType = ModalValue | null;

@@ -4,7 +4,7 @@ import { AppContext } from '../../Context';
 import './Modal.scss';
 
 interface ModalProps {
-  children: React.ReactNode
+  children: JSX.Element
 }
 
 const Modal = ({ children }: ModalProps) => {

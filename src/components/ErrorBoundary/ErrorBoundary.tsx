@@ -1,7 +1,7 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import React, { Component, ErrorInfo } from 'react';
 
 type Props = typeof ErrorBoundary.defaultProps & {
-  children?: ReactNode | null;
+  children?: JSX.Element | null;
 };
 
 interface State {
