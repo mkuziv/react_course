@@ -1,5 +1,6 @@
 import React from 'react';
 import { Post as IPost } from '../../types/interfaces';
+import Dropdown from '../Dropdown/Dropdown';
 
 import './Post.scss';
 
@@ -17,18 +18,7 @@ const Post = ({ post }: PostItemProp) => {
       <div
         className="img"
       >
-        <button type="button" className="btn-round hov">.</button>
-        <div className="dropdown">
-          <button type="button" className="dropdown-btn-x">X</button>
-          <ul>
-            <li>
-              <button type="button" className="dropdown-btn">Edit</button>
-            </li>
-            <li>
-              <button type="button" className="dropdown-btn">Delete</button>
-            </li>
-          </ul>
-        </div>
+        <Dropdown post={post} />
       </div>
       <div className="description">
         <div className="name">

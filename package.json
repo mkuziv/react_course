@@ -24,7 +24,8 @@
   "homepage": "https://github.com/mkuziv/react_course#readme",
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-select": "^5.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
