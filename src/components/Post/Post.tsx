@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AppContext } from '../../Context';
 import { Post as IPost } from '../../types/interfaces';
 import Dropdown from '../Dropdown/Dropdown';
 
@@ -9,14 +10,23 @@ interface PostItemProp {
 }
 
 const Post = ({ post }: PostItemProp) => {
+  const { setSelectedPostVal } = useContext(AppContext);
   const {
     name, year, genre,
   } = post;
 
+  const handleClick = () => {
+    setSelectedPostVal(post);
+  };
+
   return (
-    <article className="movie">
+    <article className="post">
       <div
         className="img"
+        onClick={handleClick}
+        role="button"
+        tabIndex={0}
+        onKeyDown={handleClick}
       >
         <Dropdown post={post} />
       </div>

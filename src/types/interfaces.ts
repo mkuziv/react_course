@@ -6,4 +6,5 @@ export interface Post {
   imgName: string;
   rating: number;
   runtime: number;
+  description: string;
 }
