@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import ModalValue from './types/enums';
 import { Post } from './types/interfaces';
+import useToggle from './utils/hooks';
 
 interface IAppContext {
   modal: ModalType;
@@ -26,13 +27,10 @@ const defaultState: IAppContext = {
 export const AppContext = React.createContext<IAppContext>(defaultState);
 
 export const AppProvider = ({ children }: ChildrenProps) => {
-  const [modal, setModal] = useState(defaultState.modal);
   const [editedPost, setEditedPost] = useState(defaultState.editedPost);
   const [selectedPost, setSelectedPost] = useState(defaultState.selectedPost);
 
-  const toggleModalType = (m: ModalType) => {
-    setModal(m);
-  };
+  const [modal, toggleModalType] = useToggle();
 
   const setEditedPostVal = (post:Post) => {
     setEditedPost(post);
