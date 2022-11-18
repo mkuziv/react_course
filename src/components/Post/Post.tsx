@@ -15,8 +15,12 @@ const Post = ({ post }: PostItemProp) => {
     name, year, genre,
   } = post;
 
-  const handleClick = () => {
-    setSelectedPostVal(post);
+  const handleClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLDivElement>,
+  ) => {
+    if (e.target === e.currentTarget) {
+      setSelectedPostVal(post);
+    }
   };
 
   return (
