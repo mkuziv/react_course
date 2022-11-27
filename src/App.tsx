@@ -11,6 +11,7 @@ import { SortingValue } from './types/types';
 import { filterPostsByGenre, filterPostsByName } from './utils/filterPosts';
 import sortPosts from './utils/sortPost';
 import { AppContext } from './Context';
+import MovieDetails from './components/MovieDetails/MovieDetails';
 
 import './App.scss';
 
@@ -20,7 +21,7 @@ const App = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [active, setActive] = useState('all');
   const [sort, setSort] = useState<SortingValue>('year');
-  const { modal } = useContext(AppContext);
+  const { modal, selectedPost } = useContext(AppContext);
 
   useEffect(() => {
     setPosts(sortPosts(filmPosts, sort));
@@ -43,14 +44,18 @@ const App = () => {
   return (
     <>
       <Header />
-      <Search
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        setIsSubmitted={setIsSubmitted}
-      />
+      {selectedPost
+        ? <MovieDetails />
+        : (
+          <Search
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            setIsSubmitted={setIsSubmitted}
+          />
+        )}
       <Main posts={posts} active={active} setActive={setActive} sort={sort} setSort={setSort} />
       <Footer />
-      { modal && (
+      {modal && (
         <Modal>
           <ModalManager />
         </Modal>

@@ -1,0 +1,77 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
+.movie-section {
+  background: $darkGray;
+  padding-top: 100px;
+  padding-bottom: 30px;
+}
+
+.movie {
+  height: 486px;
+  display: flex;
+  justify-content: space-between;
+
+  &__image {
+    position: relative;
+    height: 462px;
+    width: 30%;
+    background: url('../../images/pulp_fiction_bg.png');
+    background-size: cover;
+  }
+
+  &__details {
+    width: 65%;
+
+    .title {
+      display: flex;
+      align-items: center;
+
+      .h3 {
+        @include text(40px, 300, 48px);
+        color: $white;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      .circle {
+        border: 1px solid #979797;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 25px;
+      }
+
+      .rating {
+        @include text(22px, 300, 22px);
+        color: $white;
+        opacity: 0.7;
+        margin: 0 10px;
+      }
+    }
+
+    .genre {
+      @include text(14px, 500, 17px);
+      color: #919191;
+    }
+
+    .year {
+      @include text(24px, 300, 29px);
+      color: $red;
+      display: flex;
+
+      p {
+        margin:0 50px 0 0;
+      }
+    }
+
+    .description {
+      @include text(20px, 300, 24px);
+      color: $white;
+      opacity: 0.7;
+    }
+  }
+}
