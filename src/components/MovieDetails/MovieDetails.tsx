@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
+import { intervalToDuration } from 'date-fns';
 import { AppContext } from '../../Context';
-import timeConvert from '../../utils/utils';
 
 import './MovieDetails.scss';
 
@@ -10,6 +10,8 @@ const MovieDetails = () => {
   const {
     name, genre, year, rating, runtime, description,
   } = selectedPost;
+
+  const duration = intervalToDuration({ start: 0, end: runtime * 1000 * 60 });
 
   return (
     <section className="movie-section">
@@ -29,7 +31,7 @@ const MovieDetails = () => {
           <p className="genre">{genre}</p>
           <div className="year">
             <p>{year}</p>
-            <span>{timeConvert(runtime)}</span>
+            <span>{`${duration.hours} hour ${duration.minutes} minutes`}</span>
           </div>
           <p className="description">
             {description}
