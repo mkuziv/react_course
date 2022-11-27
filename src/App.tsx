@@ -44,20 +44,15 @@ const App = () => {
   return (
     <>
       <Header />
-      {
-        !selectedPost && (
+      {selectedPost
+        ? <MovieDetails />
+        : (
           <Search
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
             setIsSubmitted={setIsSubmitted}
           />
-        )
-      }
-      {
-        selectedPost && (
-          <MovieDetails />
-        )
-      }
+        )}
       <Main posts={posts} active={active} setActive={setActive} sort={sort} setSort={setSort} />
       <Footer />
       {modal && (
