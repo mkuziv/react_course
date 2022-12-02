@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
@@ -12,6 +13,8 @@ import { filterPostsByGenre, filterPostsByName } from './utils/filterPosts';
 import sortPosts from './utils/sortPost';
 import { AppContext } from './Context';
 import MovieDetails from './components/MovieDetails/MovieDetails';
+import { fetchPosts, selectAllPosts } from './slice/postsSlice';
+import store, { useAppDispatch } from './store';
 
 import './App.scss';
 
@@ -22,6 +25,16 @@ const App = () => {
   const [active, setActive] = useState('all');
   const [sort, setSort] = useState<SortingValue>('year');
   const { modal, selectedPost } = useContext(AppContext);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchPosts);
+    store.dispatch(fetchPosts);
+  }, []);
+
+  const postss = useSelector(selectAllPosts);
+  console.warn('post', postss);
 
   useEffect(() => {
     setPosts(sortPosts(filmPosts, sort));
