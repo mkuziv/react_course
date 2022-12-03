@@ -35,8 +35,8 @@ const Filters = ({
       <div className="sort">
         SORT BY
         <select name="sort" id="movie-select" value={sort} onChange={handleChange}>
-          <option value="year">release date</option>
-          <option value="rating">rating</option>
+          <option value="release_date">release date</option>
+          <option value="vote_average">vote_average</option>
           <option value="runtime">runtime</option>
         </select>
       </div>

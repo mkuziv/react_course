@@ -6,49 +6,47 @@ import Main from './components/Main/Main';
 import Modal from './components/Modal/Modal';
 import ModalManager from './components/ModalManager/ModalManager';
 import Search from './components/Search/Search';
-import filmPosts from './mock';
-import { Post } from './types/interfaces';
 import { SortingValue } from './types/types';
 import { filterPostsByGenre, filterPostsByName } from './utils/filterPosts';
 import sortPosts from './utils/sortPost';
 import { AppContext } from './Context';
 import MovieDetails from './components/MovieDetails/MovieDetails';
-import { fetchPosts, selectAllPosts } from './slice/postsSlice';
-import store, { useAppDispatch } from './store';
+import { fetchPosts, selectAllPosts, selectPostStatus } from './slice/postsSlice';
+import { useAppDispatch } from './store';
 
 import './App.scss';
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [posts, setPosts] = useState<Post[]>(filmPosts);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [active, setActive] = useState('all');
-  const [sort, setSort] = useState<SortingValue>('year');
+  const [sort, setSort] = useState<SortingValue>('release_date');
   const { modal, selectedPost } = useContext(AppContext);
 
   const dispatch = useAppDispatch();
+  const posts = useSelector(selectAllPosts);
+  console.warn('postsArr', posts);
+
+  const postStatus = useSelector(selectPostStatus);
 
   useEffect(() => {
-    dispatch(fetchPosts);
-    store.dispatch(fetchPosts);
-  }, []);
-
-  const postss = useSelector(selectAllPosts);
-  console.warn('post', postss);
-
+    if (postStatus === 'idle') {
+      dispatch(fetchPosts());
+    }
+  }, [postStatus, dispatch]);
   useEffect(() => {
-    setPosts(sortPosts(filmPosts, sort));
+    sortPosts(posts, sort);
   }, [sort]);
 
   useEffect(() => {
-    setPosts(filterPostsByGenre(filmPosts, active));
+    filterPostsByGenre(posts, active);
   }, [active]);
 
   useEffect(() => {
-    if (!searchQuery) setPosts(filterPostsByName(filmPosts, searchQuery));
+    if (!searchQuery) filterPostsByName(posts, searchQuery);
 
     if (isSubmitted) {
-      setPosts(filterPostsByName(filmPosts, searchQuery));
+      filterPostsByName(posts, searchQuery);
     }
 
     setIsSubmitted(false);

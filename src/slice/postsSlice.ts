@@ -15,10 +15,10 @@ const initialState: State = {
 
 const POSTS_URL = 'http://localhost:4000/movies';
 
-export const fetchPosts = createAsyncThunk('post/fetchPosts', async () => {
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   const response = await axios.get(POSTS_URL);
-  console.warn('res', response);
-  return response.data;
+  console.warn('res', response.data.data);
+  return response.data.data;
 });
 
 const postsSlice = createSlice({
@@ -31,8 +31,8 @@ const postsSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(fetchPosts.fulfilled, (state: State, action) => {
-        console.warn('state', state);
-        state.posts.push(action.payload);
+        state.status = 'succeeded';
+        state.posts = state.posts.concat(action.payload);
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = 'failed';
@@ -42,6 +42,7 @@ const postsSlice = createSlice({
   },
 });
 
-export const selectAllPosts = (state: State) => state.posts;
+export const selectAllPosts = (state: State) => state.posts.posts;
+export const selectPostStatus = (state: State) => state.posts.status;
 
 export default postsSlice.reducer;

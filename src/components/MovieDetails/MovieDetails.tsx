@@ -8,7 +8,8 @@ const MovieDetails = () => {
   const { selectedPost } = useContext(AppContext);
 
   const {
-    name, genre, year, rating, runtime, description,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    title, genres, release_date, vote_average, runtime, overview,
   } = selectedPost;
 
   const duration = intervalToDuration({ start: 0, end: runtime * 1000 * 60 });
@@ -23,18 +24,18 @@ const MovieDetails = () => {
         </div>
         <div className="movie__details">
           <div className="title">
-            <h3 className="h3">{name}</h3>
+            <h3 className="h3">{title}</h3>
             <div className="circle">
-              <p className="rating">{rating}</p>
+              <p className="rating">{vote_average}</p>
             </div>
           </div>
-          <p className="genre">{genre}</p>
-          <div className="year">
-            <p>{year}</p>
+          <p className="genre">{genres}</p>
+          <div className="release_date">
+            <p>{release_date}</p>
             <span>{`${duration.hours} hour ${duration.minutes} minutes`}</span>
           </div>
           <p className="description">
-            {description}
+            {overview}
           </p>
         </div>
       </div>
