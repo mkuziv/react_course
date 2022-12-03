@@ -1,22 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { fetchFilterPostsByGenre } from '../../slice/postsSlice';
+import { useAppDispatch } from '../../store';
 import { SortingValue } from '../../types/types';
 import FilterItem from './FilterItem/FilterItem';
 import './Filters.scss';
 
 interface FiltersProp {
-  active: string;
-  setActive: (value: string) => void;
   sort: string;
   setSort: (value: SortingValue) => void;
 }
 
 const Filters = ({
-  active, setActive, sort, setSort,
+  sort, setSort,
 }: FiltersProp) => {
   const filterItems = ['all', 'documentary', 'comedy', 'horror', 'crime'];
-
+  const [active, setActive] = useState('all');
+  const dispatch = useAppDispatch();
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setActive(e.currentTarget.innerHTML);
+    dispatch(fetchFilterPostsByGenre(e.currentTarget.innerHTML));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

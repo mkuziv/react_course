@@ -17,7 +17,11 @@ const POSTS_URL = 'http://localhost:4000/movies';
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
   const response = await axios.get(POSTS_URL);
-  console.warn('res', response.data.data);
+  return response.data.data;
+});
+
+export const fetchFilterPostsByGenre = createAsyncThunk('posts/filterPosts', async (ganre: string) => {
+  const response = await axios.get(`http://localhost:4000/movies?filter=${ganre}`);
   return response.data.data;
 });
 
@@ -32,9 +36,22 @@ const postsSlice = createSlice({
       })
       .addCase(fetchPosts.fulfilled, (state: State, action) => {
         state.status = 'succeeded';
+        state.posts = [];
         state.posts = state.posts.concat(action.payload);
       })
       .addCase(fetchPosts.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(fetchFilterPostsByGenre.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchFilterPostsByGenre.fulfilled, (state: State, action) => {
+        state.status = 'succeeded';
+        state.posts = [];
+        state.posts = state.posts.concat(action.payload);
+      })
+      .addCase(fetchFilterPostsByGenre.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
         // eslint-disable-next-line @typescript-eslint/semi

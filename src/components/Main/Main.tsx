@@ -8,20 +8,18 @@ import './Main.scss';
 
 interface MainProp {
   posts: Post[];
-  active: string;
-  setActive: (value: string) => void;
   sort: string;
   setSort: (value: SortingValue) => void;
 }
 
 const Main = ({
-  posts, active, setActive, sort, setSort,
+  posts, sort, setSort,
 }: MainProp) => (
   <main
     className="main"
   >
     <div className="container">
-      <Filters active={active} setActive={setActive} sort={sort} setSort={setSort} />
+      <Filters sort={sort} setSort={setSort} />
       <Posts posts={posts} />
     </div>
   </main>

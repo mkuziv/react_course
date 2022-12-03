@@ -12,8 +12,7 @@ interface PostItemProp {
 const Post = ({ post }: PostItemProp) => {
   const { setSelectedPostVal } = useContext(AppContext);
   const {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    title, release_date, genres,
+    title, release_date: releaseDate, genres,
   } = post;
 
   const handleClick = (
@@ -38,7 +37,7 @@ const Post = ({ post }: PostItemProp) => {
       <div className="description">
         <div className="name">
           <h3 className="h3">{title}</h3>
-          <span className="year">{release_date}</span>
+          <span className="year">{releaseDate.slice(0, 4)}</span>
         </div>
         {genres}
       </div>
