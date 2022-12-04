@@ -6,14 +6,13 @@
   margin: 20px 0;
 }
 
-.img {
+.img-wrapper {
   position: relative;
   height: 462px;
   width: 100%;
-  background: url('../../images/avengers_war_of_infinity_bg.png');
   background-size: contain;
   text-align: right;
-  padding: 14px;
+  margin-bottom: 50px;
 
   .hov {
     display: none;
@@ -22,6 +21,11 @@
   &:hover > .hov {
     display: inline-block;
     text-align: right;
+  }
+
+  .image {
+    width: 100%;
+    
   }
 }
 

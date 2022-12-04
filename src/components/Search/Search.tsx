@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import SearchInput from './SearchInput/SearchInput';
 import Button from '../Button/Button';
 import { fetchPosts } from '../../slice/postsSlice';
@@ -18,10 +18,6 @@ const Search = () => {
       dispatch(fetchPosts(`search=${searchQuery}&searchBy=title`));
     }
   };
-
-  useEffect(() => {
-    if (!searchQuery) dispatch(fetchPosts('sortBy=release_date&sortOrder=desc'));
-  });
 
   return (
     <section className="search">

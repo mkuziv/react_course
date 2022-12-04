@@ -18,7 +18,6 @@ const App = () => {
 
   const dispatch = useAppDispatch();
   const posts = useSelector(selectAllPosts);
-  console.warn('postsArr', posts);
 
   const postStatus = useSelector(selectPostStatus);
 

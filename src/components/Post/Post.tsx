@@ -12,7 +12,7 @@ interface PostItemProp {
 const Post = ({ post }: PostItemProp) => {
   const { setSelectedPostVal } = useContext(AppContext);
   const {
-    title, release_date: releaseDate, genres,
+    title, release_date: releaseDate, genres, poster_path: PosterPath,
   } = post;
 
   const handleClick = (
@@ -26,12 +26,17 @@ const Post = ({ post }: PostItemProp) => {
   return (
     <article className="post">
       <div
-        className="img"
+        className="img-wrapper"
         onClick={handleClick}
         role="button"
         tabIndex={0}
         onKeyDown={handleClick}
       >
+        <img
+          src={PosterPath}
+          alt=""
+          className="image"
+        />
         <Dropdown post={post} />
       </div>
       <div className="description">
