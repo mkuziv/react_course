@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
@@ -10,13 +10,10 @@ import Search from './components/Search/Search';
 import { AppContext } from './Context';
 import { fetchPosts, selectAllPosts, selectPostStatus } from './slice/postsSlice';
 import { useAppDispatch } from './store';
-import filterPostsByName from './utils/filterPosts';
 
 import './App.scss';
 
 const App = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const { modal, selectedPost } = useContext(AppContext);
 
   const dispatch = useAppDispatch();
@@ -31,27 +28,13 @@ const App = () => {
     }
   }, [postStatus, dispatch]);
 
-  useEffect(() => {
-    if (!searchQuery) filterPostsByName(posts, searchQuery);
-
-    if (isSubmitted) {
-      filterPostsByName(posts, searchQuery);
-    }
-
-    setIsSubmitted(false);
-  }, [isSubmitted, searchQuery]);
-
   return (
     <>
       <Header />
       {selectedPost
         ? <MovieDetails />
         : (
-          <Search
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-            setIsSubmitted={setIsSubmitted}
-          />
+          <Search />
         )}
       <Main posts={posts} />
       <Footer />

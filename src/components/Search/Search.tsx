@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SearchInput from './SearchInput/SearchInput';
 import Button from '../Button/Button';
+import { fetchPosts } from '../../slice/postsSlice';
+import { useAppDispatch } from '../../store';
 
 import './Search.scss';
 
-interface SearchProp {
-  searchQuery: string;
-  setSearchQuery: (value: string) => void;
-  setIsSubmitted: (value: boolean) => void;
-}
+const Search = () => {
+  const [searchQuery, setSearchQuery] = useState('');
 
-const Search = ({ searchQuery, setSearchQuery, setIsSubmitted }: SearchProp) => {
+  const dispatch = useAppDispatch();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+
+    if (searchQuery) {
+      dispatch(fetchPosts(`search=${searchQuery}&searchBy=title`));
+    }
   };
+
+  useEffect(() => {
+    if (!searchQuery) dispatch(fetchPosts('sortBy=release_date&sortOrder=desc'));
+  });
 
   return (
     <section className="search">
