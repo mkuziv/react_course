@@ -5,21 +5,18 @@ import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Modal from './components/Modal/Modal';
 import ModalManager from './components/ModalManager/ModalManager';
-import Search from './components/Search/Search';
-import { SortingValue } from './types/types';
-import filterPostsByName from './utils/filterPosts';
-import sortPosts from './utils/sortPost';
-import { AppContext } from './Context';
 import MovieDetails from './components/MovieDetails/MovieDetails';
+import Search from './components/Search/Search';
+import { AppContext } from './Context';
 import { fetchPosts, selectAllPosts, selectPostStatus } from './slice/postsSlice';
 import { useAppDispatch } from './store';
+import filterPostsByName from './utils/filterPosts';
 
 import './App.scss';
 
 const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [sort, setSort] = useState<SortingValue>('release_date');
   const { modal, selectedPost } = useContext(AppContext);
 
   const dispatch = useAppDispatch();
@@ -30,12 +27,9 @@ const App = () => {
 
   useEffect(() => {
     if (postStatus === 'idle') {
-      dispatch(fetchPosts());
+      dispatch(fetchPosts('sortBy=release_date&sortOrder=desc'));
     }
   }, [postStatus, dispatch]);
-  useEffect(() => {
-    sortPosts(posts, sort);
-  }, [sort]);
 
   useEffect(() => {
     if (!searchQuery) filterPostsByName(posts, searchQuery);
@@ -59,7 +53,7 @@ const App = () => {
             setIsSubmitted={setIsSubmitted}
           />
         )}
-      <Main posts={posts} sort={sort} setSort={setSort} />
+      <Main posts={posts} />
       <Footer />
       {modal && (
         <Modal>

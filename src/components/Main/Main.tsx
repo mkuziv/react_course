@@ -1,25 +1,20 @@
 import React from 'react';
+import { Post } from '../../types/interfaces';
 import Filters from '../Filters/Filters';
 import Posts from '../Posts/Posts';
-import { Post } from '../../types/interfaces';
-import { SortingValue } from '../../types/types';
 
 import './Main.scss';
 
 interface MainProp {
   posts: Post[];
-  sort: string;
-  setSort: (value: SortingValue) => void;
 }
 
-const Main = ({
-  posts, sort, setSort,
-}: MainProp) => (
+const Main = ({ posts }: MainProp) => (
   <main
     className="main"
   >
     <div className="container">
-      <Filters sort={sort} setSort={setSort} />
+      <Filters />
       <Posts posts={posts} />
     </div>
   </main>
