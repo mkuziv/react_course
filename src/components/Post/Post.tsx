@@ -12,13 +12,13 @@ interface PostItemProp {
 const Post = ({ post }: PostItemProp) => {
   const { setSelectedPostVal } = useContext(AppContext);
   const {
-    title, release_date: releaseDate, genres, poster_path: PosterPath,
+    title, release_date: releaseDate, genres, poster_path: posterPath,
   } = post;
 
   const handleClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLDivElement>,
   ) => {
-    if (e.target === e.currentTarget) {
+    if ((e.target as HTMLImageElement).tagName.toLowerCase() === 'img') {
       setSelectedPostVal(post);
     }
   };
@@ -33,7 +33,7 @@ const Post = ({ post }: PostItemProp) => {
         onKeyDown={handleClick}
       >
         <img
-          src={PosterPath}
+          src={posterPath}
           alt=""
           className="image"
         />
