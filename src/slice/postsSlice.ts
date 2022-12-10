@@ -3,13 +3,13 @@ import axios from 'axios';
 
 interface State {
   posts: any
-  status: string,
+  isLoading: boolean,
   error: any,
 }
 
 const initialState: State = {
   posts: [],
-  status: 'idle',
+  isLoading: false,
   error: null,
 };
 
@@ -25,21 +25,20 @@ const postsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchPosts.pending, (state) => {
-        state.status = 'loading';
+        state.isLoading = true;
       })
       .addCase(fetchPosts.fulfilled, (state: State, action) => {
-        state.status = 'succeeded';
+        state.isLoading = false;
         state.posts = [];
         state.posts = state.posts.concat(action.payload);
       })
       .addCase(fetchPosts.rejected, (state, action) => {
-        state.status = 'failed';
+        state.isLoading = false;
         state.error = action.error.message;
       });
   },
 });
 
 export const selectAllPosts = (state: State) => state.posts.posts;
-export const selectPostStatus = (state: State) => state.posts.status;
 
 export default postsSlice.reducer;

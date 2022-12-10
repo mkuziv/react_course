@@ -8,7 +8,7 @@ import ModalManager from './components/ModalManager/ModalManager';
 import MovieDetails from './components/MovieDetails/MovieDetails';
 import Search from './components/Search/Search';
 import { AppContext } from './Context';
-import { fetchPosts, selectAllPosts, selectPostStatus } from './slice/postsSlice';
+import { fetchPosts, selectAllPosts } from './slice/postsSlice';
 import { useAppDispatch } from './store';
 
 import './App.scss';
@@ -19,13 +19,9 @@ const App = () => {
   const dispatch = useAppDispatch();
   const posts = useSelector(selectAllPosts);
 
-  const postStatus = useSelector(selectPostStatus);
-
   useEffect(() => {
-    if (postStatus === 'idle') {
-      dispatch(fetchPosts('sortBy=release_date&sortOrder=desc'));
-    }
-  }, [postStatus, dispatch]);
+    dispatch(fetchPosts('sortBy=release_date&sortOrder=desc'));
+  }, []);
 
   return (
     <>
