@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import HttpRequest from '../utils/httpRequest';
 
 interface State {
   posts: any
@@ -14,7 +14,7 @@ const initialState: State = {
 };
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (query: string) => {
-  const response = await axios.get(`http://localhost:4000/movies?${query}`);
+  const response = await HttpRequest.getMovies(query);
   return response.data.data;
 });
 
