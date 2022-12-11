@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import SearchInput from './SearchInput/SearchInput';
 import Button from '../Button/Button';
-import { fetchPosts } from '../../slice/postsSlice';
+import { fetchPosts, selectQuery, updateSearch } from '../../slice/postsSlice';
 import { useAppDispatch } from '../../store';
+import getQueryParams from '../../utils/getQueryParams';
 
 import './Search.scss';
 
@@ -10,13 +12,15 @@ const Search = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const dispatch = useAppDispatch();
+  const query = useSelector(selectQuery);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    await dispatch(updateSearch(searchQuery));
+    const searchQueryValue = getQueryParams(query);
 
-    if (searchQuery) {
-      dispatch(fetchPosts(`search=${searchQuery}&searchBy=title`));
-    }
+    console.warn('searchQueryValue', searchQueryValue);
+    await dispatch(fetchPosts(searchQueryValue));
   };
 
   return (

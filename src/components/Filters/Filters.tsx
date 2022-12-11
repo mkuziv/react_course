@@ -1,41 +1,35 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   fetchPosts,
+  selectQuery,
+  updateFilter,
+  updateSort,
 } from '../../slice/postsSlice';
 import { useAppDispatch } from '../../store';
+import { Filter } from '../../types/types';
+import getQueryParams from '../../utils/getQueryParams';
 import FilterItem from './FilterItem/FilterItem';
 import './Filters.scss';
 
-enum SortingValue {
-  ReleaseDate = 'release_date',
-  VoteAverage = 'vote_average',
-  Runtime = 'runtime',
-}
-
 const Filters = () => {
-  const filterItems = ['all', 'documentary', 'comedy', 'horror', 'crime'];
+  const filterItems: Filter[] = ['all', 'documentary', 'comedy', 'horror', 'crime'];
   const [active, setActive] = useState('all');
   const dispatch = useAppDispatch();
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const query = useSelector(selectQuery);
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     setActive(e.currentTarget.innerHTML);
-    if (active === 'all') {
-      dispatch(fetchPosts('sortBy=release_date&sortOrder=desc'));
-    } else {
-      dispatch(fetchPosts(`filter=${e.currentTarget.innerHTML}`));
-    }
+    await dispatch(updateFilter(e.currentTarget.innerHTML));
+    const filterQuery = getQueryParams(query);
+    console.warn('filterQuery', filterQuery);
+    await dispatch(fetchPosts(filterQuery));
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    switch (e.target.value) {
-      case SortingValue.ReleaseDate:
-        dispatch(fetchPosts('sortBy=release_date&sortOrder=desc'));
-        break;
-      case SortingValue.Runtime:
-        dispatch(fetchPosts('sortBy=runtime&sortOrder=desc'));
-        break;
-      default:
-        dispatch(fetchPosts('sortBy=vote_average&sortOrder=desc'));
-    }
+  const handleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
+    await dispatch(updateSort(e.target.value));
+    const sortQuery = getQueryParams(query);
+    console.warn('sortQuery', sortQuery);
+    await dispatch(fetchPosts(sortQuery));
   };
 
   return (
