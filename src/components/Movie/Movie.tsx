@@ -3,28 +3,28 @@ import { AppContext } from '../../Context';
 import { Post as IPost } from '../../types/interfaces';
 import Dropdown from '../Dropdown/Dropdown';
 
-import './Post.scss';
+import './Movie.scss';
 
-interface PostItemProp {
-  post: IPost;
+interface MovieItemProp {
+  movie: IPost;
 }
 
-const Post = ({ post }: PostItemProp) => {
+const Movie = ({ movie }: MovieItemProp) => {
   const { setSelectedPostVal } = useContext(AppContext);
   const {
     title, release_date: releaseDate, genres, poster_path: posterPath,
-  } = post;
+  } = movie;
 
   const handleClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLDivElement>,
   ) => {
     if ((e.target as HTMLImageElement).tagName.toLowerCase() === 'img') {
-      setSelectedPostVal(post);
+      setSelectedPostVal(movie);
     }
   };
 
   return (
-    <article className="post">
+    <article className="single-movie">
       <div
         className="img-wrapper"
         onClick={handleClick}
@@ -37,7 +37,7 @@ const Post = ({ post }: PostItemProp) => {
           alt=""
           className="image"
         />
-        <Dropdown post={post} />
+        <Dropdown movie={movie} />
       </div>
       <div className="description">
         <div className="name">
@@ -50,4 +50,4 @@ const Post = ({ post }: PostItemProp) => {
   );
 };
 
-export default Post;
+export default Movie;

@@ -1,21 +1,16 @@
 import React from 'react';
-import { Post } from '../../types/interfaces';
 import Filters from '../Filters/Filters';
-import Posts from '../Posts/Posts';
+import Movies from '../Movies/Movies';
 
 import './Main.scss';
 
-interface MainProp {
-  posts: Post[];
-}
-
-const Main = ({ posts }: MainProp) => (
+const Main = () => (
   <main
     className="main"
   >
     <div className="container">
       <Filters />
-      <Posts posts={posts} />
+      <Movies />
     </div>
   </main>
 );
