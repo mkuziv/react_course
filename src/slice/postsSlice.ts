@@ -1,12 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import HttpRequest from '../utils/httpRequest';
 import { Filter, SortingValue } from '../types/types';
+import getQueryParams from '../utils/getQueryParams';
 
 interface State {
   queryParams: {
     search: string,
+    searchBy: string
     filter: Filter,
-    sorting: SortingValue,
+    sortBy: SortingValue,
     sortOrder: 'desc' | 'asc',
   },
   posts: any,
@@ -17,8 +19,9 @@ interface State {
 const initialState: State = {
   queryParams: {
     search: '',
+    searchBy: 'title',
     filter: 'all',
-    sorting: 'release_date',
+    sortBy: 'release_date',
     sortOrder: 'desc',
   },
   posts: [],
@@ -44,7 +47,7 @@ const postsSlice = createSlice({
     },
 
     updateSort(state, action) {
-      state.queryParams.sorting = action.payload;
+      state.queryParams.sortBy = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -67,5 +70,33 @@ const postsSlice = createSlice({
 export const { updateSearch, updateFilter, updateSort } = postsSlice.actions;
 export const selectAllPosts = (state: State) => state.posts.posts;
 export const selectQuery = (state: State) => state.posts.queryParams;
+export const selectSort = (state: State) => state.posts.queryParams.sortBy;
+
+export const updateSearchQuery = (query: string) => (dispatch: any, getState: any) => {
+  const { queryParams } = getState().posts;
+  const updatedParams = { ...queryParams, search: query };
+  const queryString = getQueryParams(updatedParams);
+
+  dispatch(updateSearch(query));
+  dispatch(fetchPosts(queryString));
+};
+
+export const updateFilterQuery = (filterVal: string) => (dispatch: any, getState: any) => {
+  const { queryParams } = getState().posts;
+  const updatedParams = { ...queryParams, filter: filterVal };
+  const queryString = getQueryParams(updatedParams);
+
+  dispatch(updateFilter(filterVal));
+  dispatch(fetchPosts(queryString));
+};
+
+export const updateSortQuery = (sort: string) => (dispatch: any, getState: any) => {
+  const { queryParams } = getState().posts;
+  const updatedParams = { ...queryParams, sortBy: sort };
+  const queryString = getQueryParams(updatedParams);
+
+  dispatch(updateSort(sort));
+  dispatch(fetchPosts(queryString));
+};
 
 export default postsSlice.reducer;

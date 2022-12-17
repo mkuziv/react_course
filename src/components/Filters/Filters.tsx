@@ -1,35 +1,25 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  fetchPosts,
-  selectQuery,
-  updateFilter,
-  updateSort,
-} from '../../slice/postsSlice';
+import { selectSort, updateFilterQuery, updateSortQuery } from '../../slice/postsSlice';
 import { useAppDispatch } from '../../store';
 import { Filter } from '../../types/types';
-import getQueryParams from '../../utils/getQueryParams';
 import FilterItem from './FilterItem/FilterItem';
+
 import './Filters.scss';
 
 const Filters = () => {
   const filterItems: Filter[] = ['all', 'documentary', 'comedy', 'horror', 'crime'];
   const [active, setActive] = useState('all');
   const dispatch = useAppDispatch();
-  const query = useSelector(selectQuery);
-  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const selectVal = useSelector(selectSort);
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setActive(e.currentTarget.innerHTML);
-    await dispatch(updateFilter(e.currentTarget.innerHTML));
-    const filterQuery = getQueryParams(query);
-    console.warn('filterQuery', filterQuery);
-    await dispatch(fetchPosts(filterQuery));
+    dispatch(updateFilterQuery(e.currentTarget.innerHTML));
   };
 
-  const handleChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
-    await dispatch(updateSort(e.target.value));
-    const sortQuery = getQueryParams(query);
-    console.warn('sortQuery', sortQuery);
-    await dispatch(fetchPosts(sortQuery));
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(updateSortQuery(e.target.value));
   };
 
   return (
@@ -43,9 +33,9 @@ const Filters = () => {
       </ul>
       <div className="sort">
         SORT BY
-        <select name="sort" id="movie-select" value="release_date" onChange={handleChange}>
+        <select name="sort" id="movie-select" value={selectVal} onChange={handleChange}>
           <option value="release_date">release date</option>
-          <option value="vote_average">vote_average</option>
+          <option value="vote_average">vote average</option>
           <option value="runtime">runtime</option>
         </select>
       </div>

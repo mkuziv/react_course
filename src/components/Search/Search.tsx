@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import SearchInput from './SearchInput/SearchInput';
-import Button from '../Button/Button';
-import { fetchPosts, selectQuery, updateSearch } from '../../slice/postsSlice';
 import { useAppDispatch } from '../../store';
-import getQueryParams from '../../utils/getQueryParams';
+import Button from '../Button/Button';
+import SearchInput from './SearchInput/SearchInput';
+import { updateSearchQuery } from '../../slice/postsSlice';
 
 import './Search.scss';
 
@@ -12,15 +10,10 @@ const Search = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const dispatch = useAppDispatch();
-  const query = useSelector(selectQuery);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await dispatch(updateSearch(searchQuery));
-    const searchQueryValue = getQueryParams(query);
-
-    console.warn('searchQueryValue', searchQueryValue);
-    await dispatch(fetchPosts(searchQueryValue));
+    dispatch(updateSearchQuery(searchQuery));
   };
 
   return (
