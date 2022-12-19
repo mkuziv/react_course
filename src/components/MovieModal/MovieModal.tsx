@@ -42,7 +42,7 @@ const MovieModal = () => {
   let movieDate: Date;
 
   if (isEditedPost) {
-    movieDate = new Date(Number(editedPost.release_date), 0, 2);
+    movieDate = new Date(editedPost.release_date);
   }
   const today = new Date();
   const defaultValue = isEditedPost ? movieDate.toISOString().split('T')[0] : today.toISOString().split('T')[0];
@@ -112,7 +112,7 @@ const MovieModal = () => {
             rows={5}
             cols={30}
           >
-            Movie description
+            {isEditedPost ? `${editedPost.overview}` : 'Movie description'}
           </textarea>
         </label>
       </form>
