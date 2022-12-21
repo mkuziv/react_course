@@ -2,12 +2,23 @@
 
 import React, { useContext } from 'react';
 import Select from 'react-select';
+import { useFormik } from 'formik';
 import makeAnimated from 'react-select/animated';
 import { AppContext } from '../../Context';
 import Button from '../Button/Button';
 import ModalValue from '../../types/enums';
 
 import './MovieModal.scss';
+
+interface MyFormValues {
+  title: string;
+  poster_path: string;
+  release_date: string;
+  runtime: number;
+  vote_average: number;
+  overview: string;
+  genres: any;
+}
 
 export interface GenreOption {
   readonly value: string;
@@ -27,6 +38,7 @@ const customStyles = {
     display: 'flex',
   }),
 };
+
 export const genreOptions: readonly GenreOption[] = [
   { value: 'Documentary', label: 'Documentary' },
   { value: 'Comedy', label: 'Comedy' },
@@ -38,24 +50,53 @@ const MovieModal = () => {
   const { modal, editedPost } = useContext(AppContext);
   const animatedComponents = makeAnimated();
   const isEditedPost = modal === ModalValue.EDIT;
-
   let movieDate: Date;
 
   if (isEditedPost) {
     movieDate = new Date(editedPost.release_date);
   }
-  const today = new Date();
-  const defaultValue = isEditedPost ? movieDate.toISOString().split('T')[0] : today.toISOString().split('T')[0];
 
+  const today = new Date();
+  const dateDefaultValue = isEditedPost ? movieDate.toISOString().split('T')[0] : today.toISOString().split('T')[0];
+
+  const initialValues: MyFormValues = !isEditedPost ? {
+    title: '',
+    poster_path: '',
+    release_date: dateDefaultValue,
+    runtime: 0,
+    vote_average: 0,
+    overview: '',
+    genres: [],
+  } : {
+    title: editedPost.title,
+    poster_path: editedPost.poster_path,
+    release_date: dateDefaultValue,
+    runtime: editedPost.runtime,
+    vote_average: editedPost.vote_average,
+    overview: editedPost.overview,
+    genres: editedPost.genres,
+  };
+
+  const {
+    handleSubmit,
+    handleChange,
+    setFieldValue,
+    values,
+  } = useFormik({
+    initialValues,
+    onSubmit: (data) => {
+      console.warn(JSON.stringify(data, null, 2));
+    },
+  });
   return (
     <section className="movie-modal">
       <h3 className="h3">{isEditedPost ? 'edit movie' : 'add movie'}</h3>
-      <form action="" className="form">
+      <form action="" className="form" onSubmit={handleSubmit}>
         <div className="main">
           <div className="left-side">
             <label htmlFor="title">
               title
-              <input type="text" id="title" value={isEditedPost ? `${editedPost.title}` : ''} />
+              <input type="text" id="title" value={values.title} onChange={handleChange} />
             </label>
             <label htmlFor="url">
               movie url
@@ -63,7 +104,8 @@ const MovieModal = () => {
                 type="text"
                 id="url"
                 placeholder="https://"
-                value={isEditedPost ? `${editedPost.poster_path}` : ''}
+                value={values.poster_path}
+                onChange={handleChange}
               />
             </label>
             <label htmlFor="genre">
@@ -72,7 +114,10 @@ const MovieModal = () => {
                 <Select
                   closeMenuOnSelect={false}
                   components={animatedComponents}
-                  defaultValue={isEditedPost ? [genreOptions[1], genreOptions[2]] : []}
+                  value={
+                    genreOptions.filter((option) => values.genres.indexOf(option.value) >= 0)
+                  }
+                  onChange={(value: any) => setFieldValue('genres', (value).map((item: any) => item.value))}
                   isMulti
                   options={genreOptions}
                   styles={customStyles}
@@ -86,13 +131,14 @@ const MovieModal = () => {
               <input
                 type="date"
                 id="date"
-                defaultValue={defaultValue}
+                defaultValue={values.release_date}
+                onChange={handleChange}
               />
             </label>
             <label htmlFor="vote_average">
               vote_average
               <br />
-              <input type="number" id="vote_average" value={isEditedPost ? `${editedPost.vote_average}` : ''} />
+              <input type="number" id="vote_average" value={values.vote_average} onChange={handleChange} />
             </label>
             <label htmlFor="runtime">
               runtime
@@ -100,7 +146,8 @@ const MovieModal = () => {
                 type="number"
                 id="runtime"
                 placeholder="minutes"
-                value={isEditedPost ? `${editedPost.runtime}` : ''}
+                value={values.runtime}
+                onChange={handleChange}
               />
             </label>
           </div>
@@ -111,15 +158,16 @@ const MovieModal = () => {
             id="overview"
             rows={5}
             cols={30}
+            onChange={handleChange}
           >
-            {isEditedPost ? `${editedPost.overview}` : 'Movie description'}
+            {values.overview}
           </textarea>
         </label>
+        <div className="movie-modal__button">
+          <Button content="reset" btn="btn bnt-outlined btn-middle" type="button" />
+          <Button content="submit" btn="btn btn-red btn-middle" type="submit" />
+        </div>
       </form>
-      <div className="movie-modal__button">
-        <Button content="reset" btn="btn bnt-outlined btn-middle" type="button" />
-        <Button content="submit" btn="btn btn-red btn-middle" type="submit" />
-      </div>
     </section>
   );
 };
