@@ -72,6 +72,15 @@ export const selectAllPosts = (state: State) => state.posts.posts;
 export const selectQuery = (state: State) => state.posts.queryParams;
 export const selectSort = (state: State) => state.posts.queryParams.sortBy;
 
+export const deleteMovie = (id: number) => async (dispatch: any, getState: any) => {
+  const { queryParams } = getState().posts;
+  const queryString = getQueryParams(queryParams);
+  const response = await HttpRequest.deleteMovie(`${id}`);
+  if (response.status === 204) {
+    dispatch(fetchPosts(queryString));
+  }
+};
+
 export const updateSearchQuery = (query: string) => (dispatch: any, getState: any) => {
   const { queryParams } = getState().posts;
   const updatedParams = { ...queryParams, search: query };

@@ -10,11 +10,12 @@ interface DropdownProps {
 }
 
 const Dropdown = ({ movie }: DropdownProps) => {
-  const { toggleModalType, setEditedPostVal } = useContext(AppContext);
+  const { toggleModalType, setEditedPostVal, setDeletedMovie } = useContext(AppContext);
   const [isDropdownShown, setIsDropdownShown] = useState(false);
 
   const handleDeleteClick = () => {
     toggleModalType(ModalValue.DELETE);
+    setDeletedMovie(movie.id);
     setIsDropdownShown(!isDropdownShown);
   };
 
