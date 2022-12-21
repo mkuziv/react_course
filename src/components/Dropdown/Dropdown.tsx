@@ -6,10 +6,10 @@ import ModalValue from '../../types/enums';
 import './Dropdown.scss';
 
 interface DropdownProps {
-  post: Post;
+  movie: Post;
 }
 
-const Dropdown = ({ post }: DropdownProps) => {
+const Dropdown = ({ movie }: DropdownProps) => {
   const { toggleModalType, setEditedPostVal } = useContext(AppContext);
   const [isDropdownShown, setIsDropdownShown] = useState(false);
 
@@ -20,7 +20,7 @@ const Dropdown = ({ post }: DropdownProps) => {
 
   const handleEditClick = () => {
     toggleModalType(ModalValue.EDIT);
-    setEditedPostVal(post);
+    setEditedPostVal(movie);
     setIsDropdownShown(!isDropdownShown);
   };
 

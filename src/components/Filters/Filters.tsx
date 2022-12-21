@@ -1,26 +1,25 @@
-import React from 'react';
-import { SortingValue } from '../../types/types';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectSort, updateFilterQuery, updateSortQuery } from '../../slice/postsSlice';
+import { useAppDispatch } from '../../store';
+import { Filter } from '../../types/types';
 import FilterItem from './FilterItem/FilterItem';
+
 import './Filters.scss';
 
-interface FiltersProp {
-  active: string;
-  setActive: (value: string) => void;
-  sort: string;
-  setSort: (value: SortingValue) => void;
-}
-
-const Filters = ({
-  active, setActive, sort, setSort,
-}: FiltersProp) => {
-  const filterItems = ['all', 'documentary', 'comedy', 'horror', 'crime'];
+const Filters = () => {
+  const filterItems: Filter[] = ['all', 'documentary', 'comedy', 'horror', 'crime'];
+  const [active, setActive] = useState('all');
+  const dispatch = useAppDispatch();
+  const selectVal = useSelector(selectSort);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setActive(e.currentTarget.innerHTML);
+    dispatch(updateFilterQuery(e.currentTarget.innerHTML));
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSort(e.target.value as SortingValue);
+    dispatch(updateSortQuery(e.target.value));
   };
 
   return (
@@ -34,9 +33,9 @@ const Filters = ({
       </ul>
       <div className="sort">
         SORT BY
-        <select name="sort" id="movie-select" value={sort} onChange={handleChange}>
-          <option value="year">release date</option>
-          <option value="rating">rating</option>
+        <select name="sort" id="movie-select" value={selectVal} onChange={handleChange}>
+          <option value="release_date">release date</option>
+          <option value="vote_average">vote average</option>
           <option value="runtime">runtime</option>
         </select>
       </div>

@@ -42,7 +42,7 @@ const MovieModal = () => {
   let movieDate: Date;
 
   if (isEditedPost) {
-    movieDate = new Date(Number(editedPost.year), 0, 2);
+    movieDate = new Date(editedPost.release_date);
   }
   const today = new Date();
   const defaultValue = isEditedPost ? movieDate.toISOString().split('T')[0] : today.toISOString().split('T')[0];
@@ -55,7 +55,7 @@ const MovieModal = () => {
           <div className="left-side">
             <label htmlFor="title">
               title
-              <input type="text" id="title" value={isEditedPost ? `${editedPost.name}` : ''} />
+              <input type="text" id="title" value={isEditedPost ? `${editedPost.title}` : ''} />
             </label>
             <label htmlFor="url">
               movie url
@@ -63,7 +63,7 @@ const MovieModal = () => {
                 type="text"
                 id="url"
                 placeholder="https://"
-                value={isEditedPost ? `${editedPost.imgName}` : ''}
+                value={isEditedPost ? `${editedPost.poster_path}` : ''}
               />
             </label>
             <label htmlFor="genre">
@@ -89,10 +89,10 @@ const MovieModal = () => {
                 defaultValue={defaultValue}
               />
             </label>
-            <label htmlFor="rating">
-              rating
+            <label htmlFor="vote_average">
+              vote_average
               <br />
-              <input type="number" id="rating" value={isEditedPost ? `${editedPost.rating}` : ''} />
+              <input type="number" id="vote_average" value={isEditedPost ? `${editedPost.vote_average}` : ''} />
             </label>
             <label htmlFor="runtime">
               runtime
@@ -112,7 +112,7 @@ const MovieModal = () => {
             rows={5}
             cols={30}
           >
-            Movie description
+            {isEditedPost ? `${editedPost.overview}` : 'Movie description'}
           </textarea>
         </label>
       </form>

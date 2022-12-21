@@ -1,19 +1,18 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixin.scss';
 
-.post {
+.single-movie {
   width: 327px;
   margin: 20px 0;
 }
 
-.img {
+.img-wrapper {
   position: relative;
   height: 462px;
   width: 100%;
-  background: url('../../images/avengers_war_of_infinity_bg.png');
   background-size: contain;
   text-align: right;
-  padding: 14px;
+  overflow: hidden;
 
   .hov {
     display: none;
@@ -22,6 +21,11 @@
   &:hover > .hov {
     display: inline-block;
     text-align: right;
+  }
+
+  .image {
+    width: 100%;
+    height: 100%
   }
 }
 

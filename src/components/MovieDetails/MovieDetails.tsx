@@ -8,7 +8,12 @@ const MovieDetails = () => {
   const { selectedPost } = useContext(AppContext);
 
   const {
-    name, genre, year, rating, runtime, description,
+    title,
+    genres,
+    release_date: releaseDate,
+    vote_average: voteAverage,
+    runtime, overview,
+    poster_path: posterPath,
   } = selectedPost;
 
   const duration = intervalToDuration({ start: 0, end: runtime * 1000 * 60 });
@@ -16,25 +21,25 @@ const MovieDetails = () => {
   return (
     <section className="movie-section">
       <div className="movie container">
-        <div
+        <img
+          src={posterPath}
+          alt=""
           className="movie__image"
-        >
-          .
-        </div>
+        />
         <div className="movie__details">
           <div className="title">
-            <h3 className="h3">{name}</h3>
+            <h3 className="h3">{title}</h3>
             <div className="circle">
-              <p className="rating">{rating}</p>
+              <p className="rating">{voteAverage}</p>
             </div>
           </div>
-          <p className="genre">{genre}</p>
+          <p className="genre">{genres}</p>
           <div className="year">
-            <p>{year}</p>
+            <p>{releaseDate}</p>
             <span>{`${duration.hours} hour ${duration.minutes} minutes`}</span>
           </div>
           <p className="description">
-            {description}
+            {overview}
           </p>
         </div>
       </div>

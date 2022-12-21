@@ -3,46 +3,51 @@ import { AppContext } from '../../Context';
 import { Post as IPost } from '../../types/interfaces';
 import Dropdown from '../Dropdown/Dropdown';
 
-import './Post.scss';
+import './Movie.scss';
 
-interface PostItemProp {
-  post: IPost;
+interface MovieItemProp {
+  movie: IPost;
 }
 
-const Post = ({ post }: PostItemProp) => {
+const Movie = ({ movie }: MovieItemProp) => {
   const { setSelectedPostVal } = useContext(AppContext);
   const {
-    name, year, genre,
-  } = post;
+    title, release_date: releaseDate, genres, poster_path: posterPath,
+  } = movie;
 
   const handleClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLDivElement>,
   ) => {
-    if (e.target === e.currentTarget) {
-      setSelectedPostVal(post);
+    if ((e.target as HTMLImageElement).tagName.toLowerCase() === 'img') {
+      setSelectedPostVal(movie);
     }
   };
 
   return (
-    <article className="post">
+    <article className="single-movie">
       <div
-        className="img"
+        className="img-wrapper"
         onClick={handleClick}
         role="button"
         tabIndex={0}
         onKeyDown={handleClick}
       >
-        <Dropdown post={post} />
+        <img
+          src={posterPath}
+          alt=""
+          className="image"
+        />
+        <Dropdown movie={movie} />
       </div>
       <div className="description">
         <div className="name">
-          <h3 className="h3">{name}</h3>
-          <span className="year">{year}</span>
+          <h3 className="h3">{title}</h3>
+          <span className="year">{releaseDate.slice(0, 4)}</span>
         </div>
-        {genre}
+        {genres}
       </div>
     </article>
   );
 };
 
-export default Post;
+export default Movie;

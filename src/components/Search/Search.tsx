@@ -1,19 +1,19 @@
-import React from 'react';
-import SearchInput from './SearchInput/SearchInput';
+import React, { useState } from 'react';
+import { useAppDispatch } from '../../store';
 import Button from '../Button/Button';
+import SearchInput from './SearchInput/SearchInput';
+import { updateSearchQuery } from '../../slice/postsSlice';
 
 import './Search.scss';
 
-interface SearchProp {
-  searchQuery: string;
-  setSearchQuery: (value: string) => void;
-  setIsSubmitted: (value: boolean) => void;
-}
+const Search = () => {
+  const [searchQuery, setSearchQuery] = useState('');
 
-const Search = ({ searchQuery, setSearchQuery, setIsSubmitted }: SearchProp) => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    dispatch(updateSearchQuery(searchQuery));
   };
 
   return (
