@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { fetchPosts, selectAllPosts } from '../../slice/postsSlice';
+import { fetchPosts, selectAllPosts, selectQuery } from '../../slice/postsSlice';
 import { useAppDispatch } from '../../store';
 import { Post } from '../../types/interfaces';
+import getQueryParams from '../../utils/getQueryParams';
 import PostItem from '../Movie/Movie';
 
 import './Movies.scss';
@@ -10,9 +11,11 @@ import './Movies.scss';
 const Movies = () => {
   const dispatch = useAppDispatch();
   const movies = useSelector(selectAllPosts);
+  const query = useSelector(selectQuery);
 
   useEffect(() => {
-    dispatch(fetchPosts('sortBy=release_date&sortOrder=desc'));
+    const queryString = getQueryParams(query);
+    dispatch(fetchPosts(queryString));
   }, []);
 
   return (
