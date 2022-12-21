@@ -8,5 +8,9 @@ class HttpRequest {
   static deleteMovie(id: string) {
     return axios.delete(`http://localhost:4000/movies/${id}`);
   }
+
+  static updateMovie(body: any) {
+    return axios.put('http://localhost:4000/movies', body);
+  }
 }
 export default HttpRequest;

@@ -7,10 +7,13 @@ import makeAnimated from 'react-select/animated';
 import { AppContext } from '../../Context';
 import Button from '../Button/Button';
 import ModalValue from '../../types/enums';
+import { useAppDispatch } from '../../store';
+import { updateMovie } from '../../slice/postsSlice';
 
 import './MovieModal.scss';
 
 interface MyFormValues {
+  id: number;
   title: string;
   poster_path: string;
   release_date: string;
@@ -47,7 +50,7 @@ export const genreOptions: readonly GenreOption[] = [
 ];
 
 const MovieModal = () => {
-  const { modal, editedPost } = useContext(AppContext);
+  const { modal, editedPost, toggleModalType } = useContext(AppContext);
   const animatedComponents = makeAnimated();
   const isEditedPost = modal === ModalValue.EDIT;
   let movieDate: Date;
@@ -60,6 +63,7 @@ const MovieModal = () => {
   const dateDefaultValue = isEditedPost ? movieDate.toISOString().split('T')[0] : today.toISOString().split('T')[0];
 
   const initialValues: MyFormValues = !isEditedPost ? {
+    id: 0,
     title: '',
     poster_path: '',
     release_date: dateDefaultValue,
@@ -68,6 +72,7 @@ const MovieModal = () => {
     overview: '',
     genres: [],
   } : {
+    id: editedPost.id,
     title: editedPost.title,
     poster_path: editedPost.poster_path,
     release_date: dateDefaultValue,
@@ -77,17 +82,22 @@ const MovieModal = () => {
     genres: editedPost.genres,
   };
 
+  const dispatch = useAppDispatch();
+
   const {
     handleSubmit,
     handleChange,
     setFieldValue,
+    resetForm,
     values,
   } = useFormik({
     initialValues,
     onSubmit: (data) => {
-      console.warn(JSON.stringify(data, null, 2));
+      dispatch(updateMovie(data));
+      toggleModalType(null);
     },
   });
+
   return (
     <section className="movie-modal">
       <h3 className="h3">{isEditedPost ? 'edit movie' : 'add movie'}</h3>
@@ -126,18 +136,17 @@ const MovieModal = () => {
             </label>
           </div>
           <div className="right-side">
-            <label htmlFor="date">
+            <label htmlFor="release_date">
               release date
               <input
                 type="date"
-                id="date"
-                defaultValue={values.release_date}
+                id="release_date"
+                value={values.release_date}
                 onChange={handleChange}
               />
             </label>
             <label htmlFor="vote_average">
-              vote_average
-              <br />
+              vote average
               <input type="number" id="vote_average" value={values.vote_average} onChange={handleChange} />
             </label>
             <label htmlFor="runtime">
@@ -159,12 +168,11 @@ const MovieModal = () => {
             rows={5}
             cols={30}
             onChange={handleChange}
-          >
-            {values.overview}
-          </textarea>
+            value={values.overview}
+          />
         </label>
         <div className="movie-modal__button">
-          <Button content="reset" btn="btn bnt-outlined btn-middle" type="button" />
+          <Button content="reset" btn="btn bnt-outlined btn-middle" type="button" onClick={() => resetForm()} />
           <Button content="submit" btn="btn btn-red btn-middle" type="submit" />
         </div>
       </form>
