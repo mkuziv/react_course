@@ -8,12 +8,12 @@ import { AppContext } from '../../Context';
 import Button from '../Button/Button';
 import ModalValue from '../../types/enums';
 import { useAppDispatch } from '../../store';
-import { updateMovie } from '../../slice/postsSlice';
+import { addMovie, updateMovie } from '../../slice/postsSlice';
 
 import './MovieModal.scss';
 
 interface MyFormValues {
-  id: number;
+  id?: number;
   title: string;
   poster_path: string;
   release_date: string;
@@ -63,7 +63,6 @@ const MovieModal = () => {
   const dateDefaultValue = isEditedPost ? movieDate.toISOString().split('T')[0] : today.toISOString().split('T')[0];
 
   const initialValues: MyFormValues = !isEditedPost ? {
-    id: 0,
     title: '',
     poster_path: '',
     release_date: dateDefaultValue,
@@ -93,7 +92,12 @@ const MovieModal = () => {
   } = useFormik({
     initialValues,
     onSubmit: (data) => {
-      dispatch(updateMovie(data));
+      if (isEditedPost) {
+        dispatch(updateMovie(data));
+        toggleModalType(null);
+      }
+
+      dispatch(addMovie(data));
       toggleModalType(null);
     },
   });
@@ -108,11 +112,11 @@ const MovieModal = () => {
               title
               <input type="text" id="title" value={values.title} onChange={handleChange} />
             </label>
-            <label htmlFor="url">
+            <label htmlFor="poster_path">
               movie url
               <input
                 type="text"
-                id="url"
+                id="poster_path"
                 placeholder="https://"
                 value={values.poster_path}
                 onChange={handleChange}

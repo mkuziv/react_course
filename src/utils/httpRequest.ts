@@ -12,5 +12,9 @@ class HttpRequest {
   static updateMovie(body: any) {
     return axios.put('http://localhost:4000/movies', body);
   }
+
+  static addMovie(body: any) {
+    return axios.post('http://localhost:4000/movies', body);
+  }
 }
 export default HttpRequest;

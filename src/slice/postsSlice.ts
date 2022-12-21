@@ -90,6 +90,15 @@ export const updateMovie = (body: any) => async (dispatch: any, getState: any) =
   }
 };
 
+export const addMovie = (body: any) => async (dispatch: any, getState: any) => {
+  const { queryParams } = getState().posts;
+  const queryString = getQueryParams(queryParams);
+  const response = await HttpRequest.addMovie(body);
+  if (response.status === 201) {
+    dispatch(fetchPosts(queryString));
+  }
+};
+
 export const updateSearchQuery = (query: string) => (dispatch: any, getState: any) => {
   const { queryParams } = getState().posts;
   const updatedParams = { ...queryParams, search: query };
