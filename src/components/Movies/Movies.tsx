@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { fetchPosts, selectAllPosts, selectQuery } from '../../slice/postsSlice';
 import { useAppDispatch } from '../../store';
-import { Post } from '../../types/interfaces';
+import { Movie } from '../../types/interfaces';
 import getQueryParams from '../../utils/getQueryParams';
 import PostItem from '../Movie/Movie';
 
@@ -25,9 +25,9 @@ const Movies = () => {
         movie found
       </span>
       <ul className="movies">
-        {movies.map((post: Post) => (
-          <li key={post.id}>
-            <PostItem movie={post} />
+        {movies.map((movie: Movie) => (
+          <li key={movie.id}>
+            <PostItem movie={movie} />
           </li>
         ))}
       </ul>

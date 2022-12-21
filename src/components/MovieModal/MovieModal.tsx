@@ -50,13 +50,13 @@ export const genreOptions: readonly GenreOption[] = [
 ];
 
 const MovieModal = () => {
-  const { modal, editedPost, toggleModalType } = useContext(AppContext);
+  const { modal, editedMovie, toggleModalType } = useContext(AppContext);
   const animatedComponents = makeAnimated();
   const isEditedPost = modal === ModalValue.EDIT;
   let movieDate: Date;
 
   if (isEditedPost) {
-    movieDate = new Date(editedPost.release_date);
+    movieDate = new Date(editedMovie.release_date);
   }
 
   const today = new Date();
@@ -71,14 +71,14 @@ const MovieModal = () => {
     overview: '',
     genres: [],
   } : {
-    id: editedPost.id,
-    title: editedPost.title,
-    poster_path: editedPost.poster_path,
+    id: editedMovie.id,
+    title: editedMovie.title,
+    poster_path: editedMovie.poster_path,
     release_date: dateDefaultValue,
-    runtime: editedPost.runtime,
-    vote_average: editedPost.vote_average,
-    overview: editedPost.overview,
-    genres: editedPost.genres,
+    runtime: editedMovie.runtime,
+    vote_average: editedMovie.vote_average,
+    overview: editedMovie.overview,
+    genres: editedMovie.genres,
   };
 
   const dispatch = useAppDispatch();

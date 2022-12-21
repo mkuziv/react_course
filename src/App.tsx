@@ -11,12 +11,12 @@ import { AppContext } from './Context';
 import './App.scss';
 
 const App = () => {
-  const { modal, selectedPost } = useContext(AppContext);
+  const { modal, selectedMovie } = useContext(AppContext);
 
   return (
     <>
       <Header />
-      {selectedPost
+      {selectedMovie
         ? <MovieDetails />
         : (
           <Search />

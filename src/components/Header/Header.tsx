@@ -7,21 +7,21 @@ import Logo from '../Logo/Logo';
 import './Header.scss';
 
 const Header = () => {
-  const { toggleModalType, selectedPost, setSelectedPostVal } = useContext(AppContext);
+  const { toggleModalType, selectedMovie, setSelectedMovie } = useContext(AppContext);
 
   const handleClick = () => {
     toggleModalType(ModalValue.ADD);
   };
 
   const handleSearchClick = () => {
-    setSelectedPostVal(null);
+    setSelectedMovie(null);
   };
 
   return (
     <header className="header">
       <div className="wrapper container">
         <Logo />
-        {!selectedPost
+        {!selectedMovie
           ? <Button type="button" content=" + add movie" btn="btn btn-gray btn-small" onClick={handleClick} />
           : <button className="search-btn" type="button" onClick={handleSearchClick}>.</button>}
       </div>
