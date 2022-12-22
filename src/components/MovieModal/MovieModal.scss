@@ -52,6 +52,10 @@
     .main {
       display: flex;
 
+      .error {
+        border: 1px solid $red;
+      }
+
       .left-side {
         width: 60%;
       }

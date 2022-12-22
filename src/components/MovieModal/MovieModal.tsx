@@ -89,6 +89,7 @@ const MovieModal = () => {
     setFieldValue,
     resetForm,
     values,
+    errors,
   } = useFormik({
     initialValues,
     onSubmit: (data) => {
@@ -100,6 +101,27 @@ const MovieModal = () => {
       dispatch(addMovie(data));
       toggleModalType(null);
     },
+
+    validate: (val) => {
+      const error: any = {};
+      if (!val.title) {
+        error.title = 'Required';
+      }
+
+      if (!val.poster_path) {
+        error.poster_path = 'Required';
+      }
+
+      if (!val.overview) {
+        error.overview = 'Required';
+      }
+
+      if (!val.runtime) {
+        error.runtime = 'Required';
+      }
+
+      return error;
+    },
   });
 
   return (
@@ -110,7 +132,13 @@ const MovieModal = () => {
           <div className="left-side">
             <label htmlFor="title">
               title
-              <input type="text" id="title" value={values.title} onChange={handleChange} />
+              <input
+                type="text"
+                id="title"
+                value={values.title}
+                onChange={handleChange}
+                className={errors.title ? 'error' : ''}
+              />
             </label>
             <label htmlFor="poster_path">
               movie url
@@ -120,6 +148,7 @@ const MovieModal = () => {
                 placeholder="https://"
                 value={values.poster_path}
                 onChange={handleChange}
+                className={errors.poster_path ? 'error' : ''}
               />
             </label>
             <label htmlFor="genre">
@@ -161,6 +190,7 @@ const MovieModal = () => {
                 placeholder="minutes"
                 value={values.runtime}
                 onChange={handleChange}
+                className={errors.runtime ? 'error' : ''}
               />
             </label>
           </div>
@@ -173,6 +203,7 @@ const MovieModal = () => {
             cols={30}
             onChange={handleChange}
             value={values.overview}
+            className={errors.overview ? 'error' : ''}
           />
         </label>
         <div className="movie-modal__button">
