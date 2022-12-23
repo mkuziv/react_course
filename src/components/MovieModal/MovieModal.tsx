@@ -40,6 +40,36 @@ const customStyles = {
     height: '57px',
     display: 'flex',
   }),
+
+  option: (styles: any) => ({
+    ...styles,
+    backgroundColor: '#323232',
+    cursor: 'pointer',
+    ':active': {
+      ...styles[':active'],
+      backgroundColor: '#5a5a5a',
+    },
+    ':hover': {
+      ...styles[':hover'],
+      backgroundColor: '#5a5a5a',
+    },
+  }),
+
+  multiValue: (styles: any) => ({
+    ...styles,
+    backgroundColor: '#5a5a5a',
+  }),
+
+  multiValueLabel: (styles: any) => ({
+    ...styles,
+    color: '#ffffff',
+  }),
+
+  multiValueRemove: (styles: any) => ({
+    ...styles,
+    color: '#323232',
+    cursor: 'pointer',
+  }),
 };
 
 export const genreOptions: readonly GenreOption[] = [
@@ -53,32 +83,19 @@ const MovieModal = () => {
   const { modal, editedMovie, toggleModalType } = useContext(AppContext);
   const animatedComponents = makeAnimated();
   const isEditedPost = modal === ModalValue.EDIT;
-  let movieDate: Date;
+  const movieDate: Date = isEditedPost ? new Date(editedMovie.release_date) : new Date();
 
-  if (isEditedPost) {
-    movieDate = new Date(editedMovie.release_date);
-  }
+  const dateDefaultValue = isEditedPost ? movieDate.toISOString().split('T')[0] : movieDate.toISOString().split('T')[0];
 
-  const today = new Date();
-  const dateDefaultValue = isEditedPost ? movieDate.toISOString().split('T')[0] : today.toISOString().split('T')[0];
-
-  const initialValues: MyFormValues = !isEditedPost ? {
-    title: '',
-    poster_path: '',
+  const initialValues: MyFormValues = {
+    id: isEditedPost ? editedMovie.id : null,
+    title: isEditedPost ? editedMovie.title : '',
+    poster_path: isEditedPost ? editedMovie.poster_path : '',
     release_date: dateDefaultValue,
-    runtime: 0,
-    vote_average: 0,
-    overview: '',
-    genres: [],
-  } : {
-    id: editedMovie.id,
-    title: editedMovie.title,
-    poster_path: editedMovie.poster_path,
-    release_date: dateDefaultValue,
-    runtime: editedMovie.runtime,
-    vote_average: editedMovie.vote_average,
-    overview: editedMovie.overview,
-    genres: editedMovie.genres,
+    runtime: isEditedPost ? editedMovie.runtime : 0,
+    vote_average: isEditedPost ? editedMovie.vote_average : 0,
+    overview: isEditedPost ? editedMovie.overview : '',
+    genres: isEditedPost ? editedMovie.genres : [],
   };
 
   const dispatch = useAppDispatch();
@@ -96,8 +113,10 @@ const MovieModal = () => {
       if (isEditedPost) {
         dispatch(updateMovie(data));
         toggleModalType(null);
+        return;
       }
 
+      delete data.id;
       dispatch(addMovie(data));
       toggleModalType(null);
     },
@@ -137,7 +156,7 @@ const MovieModal = () => {
                 id="title"
                 value={values.title}
                 onChange={handleChange}
-                className={errors.title ? 'error' : ''}
+                className={errors.title ? 'isError ' : ''}
               />
             </label>
             <label htmlFor="poster_path">
@@ -148,7 +167,7 @@ const MovieModal = () => {
                 placeholder="https://"
                 value={values.poster_path}
                 onChange={handleChange}
-                className={errors.poster_path ? 'error' : ''}
+                className={errors.poster_path ? 'isError' : ''}
               />
             </label>
             <label htmlFor="genre">
@@ -190,7 +209,7 @@ const MovieModal = () => {
                 placeholder="minutes"
                 value={values.runtime}
                 onChange={handleChange}
-                className={errors.runtime ? 'error' : ''}
+                className={errors.runtime ? 'isError' : ''}
               />
             </label>
           </div>
@@ -203,7 +222,7 @@ const MovieModal = () => {
             cols={30}
             onChange={handleChange}
             value={values.overview}
-            className={errors.overview ? 'error' : ''}
+            className={errors.overview ? 'isError' : ''}
           />
         </label>
         <div className="movie-modal__button">

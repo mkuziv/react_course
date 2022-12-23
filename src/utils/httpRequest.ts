@@ -1,20 +1,7 @@
 import axios from 'axios';
 
-class HttpRequest {
-  static getMovies(query: string) {
-    return axios.get(`http://localhost:4000/movies?${query}`);
-  }
+export type Methods = 'put' | 'post' | 'delete' | 'get';
 
-  static deleteMovie(id: string) {
-    return axios.delete(`http://localhost:4000/movies/${id}`);
-  }
+const httpRequest = (method: Methods, params?: string, body?: any) => axios[method](`http://localhost:4000/movies${params}`, body);
 
-  static updateMovie(body: any) {
-    return axios.put('http://localhost:4000/movies', body);
-  }
-
-  static addMovie(body: any) {
-    return axios.post('http://localhost:4000/movies', body);
-  }
-}
-export default HttpRequest;
+export default httpRequest;
