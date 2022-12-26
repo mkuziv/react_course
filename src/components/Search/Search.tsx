@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch } from '../../store';
 import Button from '../Button/Button';
 import SearchInput from './SearchInput/SearchInput';
@@ -8,12 +9,20 @@ import './Search.scss';
 
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [search, setSearch] = useSearchParams();
 
   const dispatch = useAppDispatch();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(updateSearchQuery(searchQuery));
+    if (searchQuery) {
+      search.set('search', searchQuery);
+      setSearch(search);
+      return;
+    }
+    search.delete('search');
+    setSearch(search);
   };
 
   return (

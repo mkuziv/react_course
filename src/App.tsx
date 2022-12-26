@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
@@ -9,18 +10,19 @@ import Search from './components/Search/Search';
 import { AppContext } from './Context';
 
 import './App.scss';
+import NotFound from './components/NotFound/NotFound';
 
 const App = () => {
-  const { modal, selectedMovie } = useContext(AppContext);
+  const { modal } = useContext(AppContext);
 
   return (
     <>
       <Header />
-      {selectedMovie
-        ? <MovieDetails />
-        : (
-          <Search />
-        )}
+      <Routes>
+        <Route path="/" element={<Search />} />
+        <Route path="/movie/:id" element={<MovieDetails />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
       <Main />
       <Footer />
       {modal && (
