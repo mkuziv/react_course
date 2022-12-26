@@ -1,26 +1,27 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../../Context';
-import { Post } from '../../types/interfaces';
+import { Movie } from '../../types/interfaces';
 import ModalValue from '../../types/enums';
 
 import './Dropdown.scss';
 
 interface DropdownProps {
-  movie: Post;
+  movie: Movie;
 }
 
 const Dropdown = ({ movie }: DropdownProps) => {
-  const { toggleModalType, setEditedPostVal } = useContext(AppContext);
+  const { toggleModalType, setEditedMovie, setDeletedMovie } = useContext(AppContext);
   const [isDropdownShown, setIsDropdownShown] = useState(false);
 
   const handleDeleteClick = () => {
     toggleModalType(ModalValue.DELETE);
+    setDeletedMovie(movie.id);
     setIsDropdownShown(!isDropdownShown);
   };
 
   const handleEditClick = () => {
     toggleModalType(ModalValue.EDIT);
-    setEditedPostVal(movie);
+    setEditedMovie(movie);
     setIsDropdownShown(!isDropdownShown);
   };
 

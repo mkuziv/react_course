@@ -5,7 +5,7 @@ import { AppContext } from '../../Context';
 import './MovieDetails.scss';
 
 const MovieDetails = () => {
-  const { selectedPost } = useContext(AppContext);
+  const { selectedMovie } = useContext(AppContext);
 
   const {
     title,
@@ -14,7 +14,7 @@ const MovieDetails = () => {
     vote_average: voteAverage,
     runtime, overview,
     poster_path: posterPath,
-  } = selectedPost;
+  } = selectedMovie;
 
   const duration = intervalToDuration({ start: 0, end: runtime * 1000 * 60 });
 

@@ -1,4 +1,4 @@
-export interface Post {
+export interface Movie {
   budget: number;
   genres: string;
   id: number;

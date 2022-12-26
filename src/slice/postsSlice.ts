@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import HttpRequest from '../utils/httpRequest';
+import httpRequest, { Methods } from '../utils/httpRequest';
 import { Filter, SortingValue } from '../types/types';
 import getQueryParams from '../utils/getQueryParams';
 
@@ -30,7 +30,7 @@ const initialState: State = {
 };
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (query: string) => {
-  const response = await HttpRequest.getMovies(query);
+  const response = await httpRequest(('get' as Methods), `?${query}`);
   return response.data.data;
 });
 
@@ -71,6 +71,48 @@ export const { updateSearch, updateFilter, updateSort } = postsSlice.actions;
 export const selectAllPosts = (state: State) => state.posts.posts;
 export const selectQuery = (state: State) => state.posts.queryParams;
 export const selectSort = (state: State) => state.posts.queryParams.sortBy;
+
+export const deleteMovie = (id: number) => async (dispatch: any, getState: any) => {
+  const { queryParams } = getState().posts;
+  const queryString = getQueryParams(queryParams);
+
+  try {
+    const response = await httpRequest(('delete' as Methods), `/${id}`);
+    if (response.status === 204) {
+      dispatch(fetchPosts(queryString));
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updateMovie = (body: any) => async (dispatch: any, getState: any) => {
+  const { queryParams } = getState().posts;
+  const queryString = getQueryParams(queryParams);
+
+  try {
+    const response = await httpRequest(('put' as Methods), '', body);
+    if (response.status === 200) {
+      dispatch(fetchPosts(queryString));
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const addMovie = (body: any) => async (dispatch: any, getState: any) => {
+  const { queryParams } = getState().posts;
+  const queryString = getQueryParams(queryParams);
+
+  try {
+    const response = await httpRequest(('post' as Methods), '', body);
+    if (response.status === 201) {
+      dispatch(fetchPosts(queryString));
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 export const updateSearchQuery = (query: string) => (dispatch: any, getState: any) => {
   const { queryParams } = getState().posts;

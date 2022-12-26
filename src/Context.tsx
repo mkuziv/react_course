@@ -1,15 +1,17 @@
 import React, { useMemo, useState } from 'react';
 import ModalValue from './types/enums';
-import { Post } from './types/interfaces';
+import { Movie } from './types/interfaces';
 import useToggle from './utils/hooks';
 
 interface IAppContext {
   modal: ModalType;
-  toggleModalType ?: (value: string) => void;
-  editedPost?: Post | null;
-  setEditedPostVal?: (value: Post) => void;
-  selectedPost?: Post | null;
-  setSelectedPostVal?: (value: Post) => void;
+  toggleModalType ?: (value: string | null) => void;
+  editedMovie?: Movie | null;
+  setEditedMovie?: (value: Movie) => void;
+  selectedMovie?: Movie | null;
+  setSelectedMovie?: (value: Movie) => void;
+  deletedMovieID?: number | null;
+  setDeletedMovie?: (value: number | null) => void;
 }
 
 interface ChildrenProps {
@@ -20,29 +22,42 @@ type ModalType = ModalValue | null;
 
 const defaultState: IAppContext = {
   modal: null,
-  editedPost: null,
-  selectedPost: null,
+  editedMovie: null,
+  selectedMovie: null,
+  deletedMovieID: null,
 };
 
 export const AppContext = React.createContext<IAppContext>(defaultState);
 
 export const AppProvider = ({ children }: ChildrenProps) => {
-  const [editedPost, setEditedPost] = useState(defaultState.editedPost);
-  const [selectedPost, setSelectedPost] = useState(defaultState.selectedPost);
+  const [editedMovie, setEdited] = useState(defaultState.editedMovie);
+  const [selectedMovie, setSelected] = useState(defaultState.selectedMovie);
+  const [deletedMovieID, setDeleted] = useState(defaultState.deletedMovieID);
 
   const [modal, toggleModalType] = useToggle();
 
-  const setEditedPostVal = (post:Post) => {
-    setEditedPost(post);
+  const setEditedMovie = (movie:Movie) => {
+    setEdited(movie);
   };
 
-  const setSelectedPostVal = (post:Post) => {
-    setSelectedPost(post);
+  const setSelectedMovie = (movie:Movie) => {
+    setSelected(movie);
+  };
+
+  const setDeletedMovie = (value: number | null) => {
+    setDeleted(value);
   };
 
   const context = useMemo(() => ({
-    modal, toggleModalType, editedPost, setEditedPostVal, selectedPost, setSelectedPostVal,
-  }), [modal, editedPost, selectedPost]);
+    modal,
+    toggleModalType,
+    editedMovie,
+    setEditedMovie,
+    selectedMovie,
+    setSelectedMovie,
+    deletedMovieID,
+    setDeletedMovie,
+  }), [modal, editedMovie, selectedMovie, deletedMovieID]);
 
   return (
     <AppContext.Provider

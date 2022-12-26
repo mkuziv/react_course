@@ -2,12 +2,26 @@
 
 import React, { useContext } from 'react';
 import Select from 'react-select';
+import { useFormik } from 'formik';
 import makeAnimated from 'react-select/animated';
 import { AppContext } from '../../Context';
 import Button from '../Button/Button';
 import ModalValue from '../../types/enums';
+import { useAppDispatch } from '../../store';
+import { addMovie, updateMovie } from '../../slice/postsSlice';
 
 import './MovieModal.scss';
+
+interface MyFormValues {
+  id?: number;
+  title: string;
+  poster_path: string;
+  release_date: string;
+  runtime: number;
+  vote_average: number;
+  overview: string;
+  genres: any;
+}
 
 export interface GenreOption {
   readonly value: string;
@@ -26,7 +40,38 @@ const customStyles = {
     height: '57px',
     display: 'flex',
   }),
+
+  option: (styles: any) => ({
+    ...styles,
+    backgroundColor: '#323232',
+    cursor: 'pointer',
+    ':active': {
+      ...styles[':active'],
+      backgroundColor: '#5a5a5a',
+    },
+    ':hover': {
+      ...styles[':hover'],
+      backgroundColor: '#5a5a5a',
+    },
+  }),
+
+  multiValue: (styles: any) => ({
+    ...styles,
+    backgroundColor: '#5a5a5a',
+  }),
+
+  multiValueLabel: (styles: any) => ({
+    ...styles,
+    color: '#ffffff',
+  }),
+
+  multiValueRemove: (styles: any) => ({
+    ...styles,
+    color: '#323232',
+    cursor: 'pointer',
+  }),
 };
+
 export const genreOptions: readonly GenreOption[] = [
   { value: 'Documentary', label: 'Documentary' },
   { value: 'Comedy', label: 'Comedy' },
@@ -35,35 +80,94 @@ export const genreOptions: readonly GenreOption[] = [
 ];
 
 const MovieModal = () => {
-  const { modal, editedPost } = useContext(AppContext);
+  const { modal, editedMovie, toggleModalType } = useContext(AppContext);
   const animatedComponents = makeAnimated();
   const isEditedPost = modal === ModalValue.EDIT;
+  const movieDate: Date = isEditedPost ? new Date(editedMovie.release_date) : new Date();
 
-  let movieDate: Date;
+  const dateDefaultValue = isEditedPost ? movieDate.toISOString().split('T')[0] : movieDate.toISOString().split('T')[0];
 
-  if (isEditedPost) {
-    movieDate = new Date(editedPost.release_date);
-  }
-  const today = new Date();
-  const defaultValue = isEditedPost ? movieDate.toISOString().split('T')[0] : today.toISOString().split('T')[0];
+  const initialValues: MyFormValues = {
+    id: isEditedPost ? editedMovie.id : null,
+    title: isEditedPost ? editedMovie.title : '',
+    poster_path: isEditedPost ? editedMovie.poster_path : '',
+    release_date: dateDefaultValue,
+    runtime: isEditedPost ? editedMovie.runtime : 0,
+    vote_average: isEditedPost ? editedMovie.vote_average : 0,
+    overview: isEditedPost ? editedMovie.overview : '',
+    genres: isEditedPost ? editedMovie.genres : [],
+  };
+
+  const dispatch = useAppDispatch();
+
+  const {
+    handleSubmit,
+    handleChange,
+    setFieldValue,
+    resetForm,
+    values,
+    errors,
+  } = useFormik({
+    initialValues,
+    onSubmit: (data) => {
+      if (isEditedPost) {
+        dispatch(updateMovie(data));
+        toggleModalType(null);
+        return;
+      }
+
+      delete data.id;
+      dispatch(addMovie(data));
+      toggleModalType(null);
+    },
+
+    validate: (val) => {
+      const error: any = {};
+      if (!val.title) {
+        error.title = 'Required';
+      }
+
+      if (!val.poster_path) {
+        error.poster_path = 'Required';
+      }
+
+      if (!val.overview) {
+        error.overview = 'Required';
+      }
+
+      if (!val.runtime) {
+        error.runtime = 'Required';
+      }
+
+      return error;
+    },
+  });
 
   return (
     <section className="movie-modal">
       <h3 className="h3">{isEditedPost ? 'edit movie' : 'add movie'}</h3>
-      <form action="" className="form">
+      <form action="" className="form" onSubmit={handleSubmit}>
         <div className="main">
           <div className="left-side">
             <label htmlFor="title">
               title
-              <input type="text" id="title" value={isEditedPost ? `${editedPost.title}` : ''} />
+              <input
+                type="text"
+                id="title"
+                value={values.title}
+                onChange={handleChange}
+                className={errors.title ? 'isError ' : ''}
+              />
             </label>
-            <label htmlFor="url">
+            <label htmlFor="poster_path">
               movie url
               <input
                 type="text"
-                id="url"
+                id="poster_path"
                 placeholder="https://"
-                value={isEditedPost ? `${editedPost.poster_path}` : ''}
+                value={values.poster_path}
+                onChange={handleChange}
+                className={errors.poster_path ? 'isError' : ''}
               />
             </label>
             <label htmlFor="genre">
@@ -72,7 +176,10 @@ const MovieModal = () => {
                 <Select
                   closeMenuOnSelect={false}
                   components={animatedComponents}
-                  defaultValue={isEditedPost ? [genreOptions[1], genreOptions[2]] : []}
+                  value={
+                    genreOptions.filter((option) => values.genres.indexOf(option.value) >= 0)
+                  }
+                  onChange={(value: any) => setFieldValue('genres', (value).map((item: any) => item.value))}
                   isMulti
                   options={genreOptions}
                   styles={customStyles}
@@ -81,18 +188,18 @@ const MovieModal = () => {
             </label>
           </div>
           <div className="right-side">
-            <label htmlFor="date">
+            <label htmlFor="release_date">
               release date
               <input
                 type="date"
-                id="date"
-                defaultValue={defaultValue}
+                id="release_date"
+                value={values.release_date}
+                onChange={handleChange}
               />
             </label>
             <label htmlFor="vote_average">
-              vote_average
-              <br />
-              <input type="number" id="vote_average" value={isEditedPost ? `${editedPost.vote_average}` : ''} />
+              vote average
+              <input type="number" id="vote_average" value={values.vote_average} onChange={handleChange} />
             </label>
             <label htmlFor="runtime">
               runtime
@@ -100,7 +207,9 @@ const MovieModal = () => {
                 type="number"
                 id="runtime"
                 placeholder="minutes"
-                value={isEditedPost ? `${editedPost.runtime}` : ''}
+                value={values.runtime}
+                onChange={handleChange}
+                className={errors.runtime ? 'isError' : ''}
               />
             </label>
           </div>
@@ -111,15 +220,16 @@ const MovieModal = () => {
             id="overview"
             rows={5}
             cols={30}
-          >
-            {isEditedPost ? `${editedPost.overview}` : 'Movie description'}
-          </textarea>
+            onChange={handleChange}
+            value={values.overview}
+            className={errors.overview ? 'isError' : ''}
+          />
         </label>
+        <div className="movie-modal__button">
+          <Button content="reset" btn="btn bnt-outlined btn-middle" type="button" onClick={() => resetForm()} />
+          <Button content="submit" btn="btn btn-red btn-middle" type="submit" />
+        </div>
       </form>
-      <div className="movie-modal__button">
-        <Button content="reset" btn="btn bnt-outlined btn-middle" type="button" />
-        <Button content="submit" btn="btn btn-red btn-middle" type="submit" />
-      </div>
     </section>
   );
 };

@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../../Context';
-import { Post as IPost } from '../../types/interfaces';
+import { Movie as IMovie } from '../../types/interfaces';
 import Dropdown from '../Dropdown/Dropdown';
 
 import './Movie.scss';
 
 interface MovieItemProp {
-  movie: IPost;
+  movie: IMovie;
 }
 
 const Movie = ({ movie }: MovieItemProp) => {
-  const { setSelectedPostVal } = useContext(AppContext);
+  const { setSelectedMovie } = useContext(AppContext);
   const {
     title, release_date: releaseDate, genres, poster_path: posterPath,
   } = movie;
@@ -19,7 +19,7 @@ const Movie = ({ movie }: MovieItemProp) => {
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLDivElement>,
   ) => {
     if ((e.target as HTMLImageElement).tagName.toLowerCase() === 'img') {
-      setSelectedPostVal(movie);
+      setSelectedMovie(movie);
     }
   };
 

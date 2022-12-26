@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-class HttpRequest {
-  static getMovies(query: string) {
-    return axios.get(`http://localhost:4000/movies?${query}`);
-  }
-}
-export default HttpRequest;
+export type Methods = 'put' | 'post' | 'delete' | 'get';
+
+const httpRequest = (method: Methods, params?: string, body?: any) => axios[method](`http://localhost:4000/movies${params}`, body);
+
+export default httpRequest;
