@@ -18,7 +18,7 @@ const Header = () => {
 
   const handleSearchClick = () => {
     setSelectedMovie(null);
-    navigate('/');
+    navigate('/search');
   };
 
   return (

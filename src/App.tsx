@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
@@ -19,9 +19,10 @@ const App = () => {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Search />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/movie/:id" element={<MovieDetails />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/" element={<Navigate to="/search" replace />} />
       </Routes>
       <Main />
       <Footer />
