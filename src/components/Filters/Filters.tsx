@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { selectSort, updateFilterQuery, updateSortQuery } from '../../slice/postsSlice';
+import { fetchPosts } from '../../slice/postsSlice';
 import { useAppDispatch } from '../../store';
 import { Filter } from '../../types/types';
 import FilterItem from './FilterItem/FilterItem';
@@ -10,33 +9,28 @@ import './Filters.scss';
 
 const Filters = () => {
   const filterItems: Filter[] = ['all', 'documentary', 'comedy', 'horror', 'crime'];
-  const [active, setActive] = useState('all');
+  const [query, setQuery] = useSearchParams();
+  const [active, setActive] = useState(query.get('genre') || 'all');
   const dispatch = useAppDispatch();
-  const selectVal = useSelector(selectSort);
-  const [search, setSearch] = useSearchParams();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setActive(e.currentTarget.innerHTML);
-    dispatch(updateFilterQuery(e.currentTarget.innerHTML));
+    dispatch(fetchPosts(`searchBy=title&sortOrder=desc&sortBy=${query.get('sortBy') || ''}&search=${query.get('search') || ''}&filter=${e.currentTarget.innerHTML !== 'all' ? e.currentTarget.innerHTML : ''}`));
+
     if (e.currentTarget.innerHTML !== filterItems[0]) {
-      search.set('genre', e.currentTarget.innerHTML);
-      setSearch(search);
+      query.set('genre', e.currentTarget.innerHTML);
+      setQuery(query);
       return;
     }
-    search.delete('genre');
-    setSearch(search);
+    query.delete('genre');
+    setQuery(query);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(updateSortQuery(e.target.value));
-    search.set('sortBy', e.target.value);
-    setSearch(search);
+    dispatch(fetchPosts(`searchBy=title&sortOrder=desc&sortBy=${e.target.value}&search=${query.get('search') || ''}&filter=${query.get('filter') || ''}`));
+    query.set('sortBy', e.target.value);
+    setQuery(query);
   };
-
-  useEffect(() => {
-    search.set('sortBy', selectVal);
-    setSearch(search);
-  }, []);
 
   return (
     <div className="filters-wrapper">
@@ -49,7 +43,7 @@ const Filters = () => {
       </ul>
       <div className="sort">
         SORT BY
-        <select name="sort" id="movie-select" value={selectVal} onChange={handleChange}>
+        <select name="sort" id="movie-select" value={query.get('sortBy') || 'release_date'} onChange={handleChange}>
           <option value="release_date">release date</option>
           <option value="vote_average">vote average</option>
           <option value="runtime">runtime</option>
