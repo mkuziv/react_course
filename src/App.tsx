@@ -1,5 +1,10 @@
 import React, { useContext } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
@@ -14,6 +19,7 @@ import NotFound from './components/NotFound/NotFound';
 
 const App = () => {
   const { modal } = useContext(AppContext);
+  const { pathname } = useLocation();
 
   return (
     <>
@@ -24,7 +30,7 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Navigate to="/search" replace />} />
       </Routes>
-      <Main />
+      { (pathname.includes('search') || pathname.includes('movie')) && <Main />}
       <Footer />
       {modal && (
         <Modal>
