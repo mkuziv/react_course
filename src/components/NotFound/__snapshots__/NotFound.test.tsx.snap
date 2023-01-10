@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFound render 1`] = `
+<div>
+  <section
+    class="error-page"
+  >
+    <div
+      class="error-page__wrapper"
+    >
+      <h3
+        class="header"
+      >
+        PAGE NOT FOUND!
+      </h3>
+    </div>
+  </section>
+</div>
+`;
