@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, createContext } from 'react';
 import ModalValue from './types/enums';
 import { Movie } from './types/interfaces';
 import useToggle from './utils/hooks';
@@ -26,8 +26,7 @@ const defaultState: IAppContext = {
   selectedMovie: null,
   deletedMovieID: null,
 };
-
-export const AppContext = React.createContext<IAppContext>(defaultState);
+export const AppContext = createContext<IAppContext>(defaultState);
 
 export const AppProvider = ({ children }: ChildrenProps) => {
   const [editedMovie, setEdited] = useState(defaultState.editedMovie);
