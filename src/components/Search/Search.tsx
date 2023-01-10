@@ -1,19 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useAppDispatch } from '../../store';
 import Button from '../Button/Button';
 import SearchInput from './SearchInput/SearchInput';
-import { updateSearchQuery } from '../../slice/postsSlice';
 
 import './Search.scss';
+import { fetchPosts } from '../../slice/postsSlice';
 
 const Search = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [query, setQuery] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(query.get('search'));
 
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(fetchPosts(`searchBy=title&sortOrder=desc&sortBy=${query.get('sortBy') || ''}&search=${query.get('search') || ''}&filter=${query.get('genre') || ''}`));
+    setSearchQuery(searchQuery);
+  }, [searchQuery]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(updateSearchQuery(searchQuery));
+
+    dispatch(fetchPosts(`searchBy=title&sortOrder=desc&sortBy=${query.get('sortBy') || ''}&search=${searchQuery}&filter=${query.get('genre') || ''}`));
+    if (searchQuery) {
+      query.set('search', searchQuery);
+      setQuery(query);
+      return;
+    }
+    query.delete('search');
+    setQuery(query);
   };
 
   return (

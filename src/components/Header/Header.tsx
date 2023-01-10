@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Context';
 import ModalValue from '../../types/enums';
 import Button from '../Button/Button';
@@ -9,12 +10,15 @@ import './Header.scss';
 const Header = () => {
   const { toggleModalType, selectedMovie, setSelectedMovie } = useContext(AppContext);
 
+  const navigate = useNavigate();
+
   const handleClick = () => {
     toggleModalType(ModalValue.ADD);
   };
 
   const handleSearchClick = () => {
     setSelectedMovie(null);
+    navigate('/search');
   };
 
   return (

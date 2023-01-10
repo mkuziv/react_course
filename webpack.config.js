@@ -82,4 +82,7 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new ESLintPlugin(options),
   ],
+  devServer: {
+    historyApiFallback: true,
+  },
 };

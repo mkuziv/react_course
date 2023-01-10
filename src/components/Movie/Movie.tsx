@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Context';
 import { Movie as IMovie } from '../../types/interfaces';
 import Dropdown from '../Dropdown/Dropdown';
@@ -15,11 +16,14 @@ const Movie = ({ movie }: MovieItemProp) => {
     title, release_date: releaseDate, genres, poster_path: posterPath,
   } = movie;
 
+  const navigate = useNavigate();
+
   const handleClick = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLDivElement>,
   ) => {
     if ((e.target as HTMLImageElement).tagName.toLowerCase() === 'img') {
       setSelectedMovie(movie);
+      navigate(`/movie/${movie.id}`);
     }
   };
 

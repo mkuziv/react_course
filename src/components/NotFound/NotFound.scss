@@ -1,0 +1,19 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixin.scss';
+
+.error-page {
+  margin-bottom: 10px;
+  background: $darkGray;
+  height: 87vh;
+  padding-top: 100px;
+
+  &__wrapper {
+    max-width: 960px;
+    color: $red;
+
+    .header {
+      @include text(50px, 900, 60px);
+      text-align: center;
+    }
+  }
+}
