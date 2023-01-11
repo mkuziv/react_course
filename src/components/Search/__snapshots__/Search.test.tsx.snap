@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search render snapshot 1`] = `
+<div>
+  <section
+    class="search"
+  >
+    <div
+      class="wrapper"
+    >
+      <h2
+        class="h2"
+      >
+        FIND YOUR MOVIE
+      </h2>
+      <br />
+      <form
+        class="search-form"
+      >
+        <input
+          class="search-input"
+          placeholder="What do you want to watch?"
+          type="text"
+          value=""
+        />
+        <button
+          class="btn btn-big btn-red"
+          type="submit"
+        >
+          search
+        </button>
+      </form>
+    </div>
+  </section>
+</div>
+`;
