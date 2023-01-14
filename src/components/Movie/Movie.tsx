@@ -38,7 +38,7 @@ const Movie = ({ movie }: MovieItemProp) => {
       >
         <img
           src={posterPath}
-          alt=""
+          alt={title}
           className="image"
         />
         <Dropdown movie={movie} />

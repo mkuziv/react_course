@@ -1,3 +1,6 @@
 *.css
 *.html
 babel.config.js
+/cypress
+cypress.config.ts
+jest.config.js
