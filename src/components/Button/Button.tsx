@@ -10,7 +10,7 @@ interface BtnProp {
 }
 
 const Button: React.FC<BtnProp> = ({
-  content, type = 'button', btn, onClick = () => {},
+  content, type, btn, onClick,
 }) => (
   <button
     className={btn}
