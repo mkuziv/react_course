@@ -3,7 +3,7 @@ import ModalValue from './types/enums';
 import { Movie } from './types/interfaces';
 import useToggle from './utils/hooks';
 
-interface IAppContext {
+export interface IAppContext {
   modal: ModalType;
   toggleModalType ?: (value: string | null) => void;
   editedMovie?: Movie | null;

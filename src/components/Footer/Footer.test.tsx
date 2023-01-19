@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import Footer from './Footer';
 import { AppProvider } from '../../Context';
 
-const renderAppContext = (children: any) => render(
+const renderAppContext = (children: JSX.Element) => render(
   <AppProvider>
     {children}
   </AppProvider>,

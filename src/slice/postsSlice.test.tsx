@@ -1,10 +1,17 @@
 import axios from 'axios';
 import store from '../store';
+import { Movie } from '../types/interfaces';
 import { fetchPosts } from './postsSlice';
 
 jest.mock('axios');
 
-const resp: any = {
+interface ResponseData {
+  data: {
+    data: Movie[];
+  }
+}
+
+const resp: ResponseData = {
   data: {
     data: [{
       id: 1,
