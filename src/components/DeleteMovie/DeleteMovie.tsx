@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { AppContext } from '../../Context';
 import { useAppDispatch } from '../../store';
 import Button from '../Button/Button';
@@ -8,9 +9,11 @@ import './DeleteMovie.scss';
 
 const DeleteMovie = () => {
   const { deletedMovieID, toggleModalType, setDeletedMovie } = useContext(AppContext);
+  const [query] = useSearchParams();
   const dispatch = useAppDispatch();
+
   const handleDelete = () => {
-    dispatch(deleteMovie(deletedMovieID));
+    dispatch(deleteMovie(deletedMovieID, `searchBy=title&sortOrder=desc&sortBy=${query.get('sortBy') || 'release_date'}&search=${query.get('search') || ''}&filter=${query.get('genre') || ''}`));
     toggleModalType(null);
     setDeletedMovie(null);
   };

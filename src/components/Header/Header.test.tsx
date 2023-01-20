@@ -2,8 +2,9 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { AppContext, IAppContext } from '../../Context';
+import { AppContext } from '../../Context';
 import Header from './Header';
+import { IAppContext } from '../../types/interfaces';
 
 const toggleModalType = jest.fn();
 const setSelectedMovie = jest.fn();
