@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
 import React, { useContext } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Select from 'react-select';
 import { useFormik } from 'formik';
 import makeAnimated from 'react-select/animated';
@@ -9,21 +10,11 @@ import Button from '../Button/Button';
 import ModalValue from '../../types/enums';
 import { useAppDispatch } from '../../store';
 import { addMovie, updateMovie } from '../../slice/postsSlice';
+import { FormValues } from '../../types/interfaces';
 
 import './MovieModal.scss';
 
-interface MyFormValues {
-  id?: number;
-  title: string;
-  poster_path: string;
-  release_date: string;
-  runtime: number;
-  vote_average: number;
-  overview: string;
-  genres: any;
-}
-
-export interface GenreOption {
+interface GenreOption {
   readonly value: string;
   readonly label: string;
 }
@@ -82,12 +73,16 @@ export const genreOptions: readonly GenreOption[] = [
 const MovieModal = () => {
   const { modal, editedMovie, toggleModalType } = useContext(AppContext);
   const animatedComponents = makeAnimated();
+  const [query] = useSearchParams();
   const isEditedPost = modal === ModalValue.EDIT;
   const movieDate: Date = isEditedPost ? new Date(editedMovie.release_date) : new Date();
+  const queryString = `searchBy=title&sortOrder=desc&sortBy=${query.get('sortBy') || 'release_date'}&search=${query.get('search') || ''}&filter=${query.get('genre') || ''}`;
 
-  const dateDefaultValue = isEditedPost ? movieDate.toISOString().split('T')[0] : movieDate.toISOString().split('T')[0];
+  const dateDefaultValue = isEditedPost
+    ? movieDate.toISOString().split('T')[0]
+    : movieDate.toISOString().split('T')[0];
 
-  const initialValues: MyFormValues = {
+  const initialValues: FormValues = {
     id: isEditedPost ? editedMovie.id : null,
     title: isEditedPost ? editedMovie.title : '',
     poster_path: isEditedPost ? editedMovie.poster_path : '',
@@ -111,13 +106,13 @@ const MovieModal = () => {
     initialValues,
     onSubmit: (data) => {
       if (isEditedPost) {
-        dispatch(updateMovie(data));
+        dispatch(updateMovie(data, queryString));
         toggleModalType(null);
         return;
       }
 
       delete data.id;
-      dispatch(addMovie(data));
+      dispatch(addMovie(data, queryString));
       toggleModalType(null);
     },
 
@@ -179,7 +174,7 @@ const MovieModal = () => {
                   value={
                     genreOptions.filter((option) => values.genres.indexOf(option.value) >= 0)
                   }
-                  onChange={(value: any) => setFieldValue('genres', (value).map((item: any) => item.value))}
+                  onChange={(value: GenreOption[]) => setFieldValue('genres', (value).map((item: GenreOption) => item.value))}
                   isMulti
                   options={genreOptions}
                   styles={customStyles}

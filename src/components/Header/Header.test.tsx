@@ -4,27 +4,37 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { AppContext } from '../../Context';
 import Header from './Header';
+import { IAppContext } from '../../types/interfaces';
 
 const toggleModalType = jest.fn();
 const setSelectedMovie = jest.fn();
 
-const mockDataSearch: any = {
+const mockDataSearch: IAppContext = {
   modal: null,
   editedMovie: null,
-  selectedMovie: true,
+  selectedMovie: {
+    id: 1,
+    title: 'title',
+    poster_path: 'path',
+    release_date: '2018-12-12',
+    runtime: 120,
+    vote_average: 7,
+    overview: 'overview',
+    genres: ['comedy'],
+  },
   deletedMovieID: null,
   setSelectedMovie,
 };
 
-const mockDataAddMovie: any = {
+const mockDataAddMovie: IAppContext = {
   modal: null,
   editedMovie: null,
-  selectedMovie: false,
+  selectedMovie: null,
   deletedMovieID: null,
   toggleModalType,
 };
 
-const renderAppContext = (children: any, mockData: any) => render(
+const renderAppContext = (children: JSX.Element, mockData: IAppContext) => render(
   <MemoryRouter>
     <AppContext.Provider value={mockData}>
       {children}

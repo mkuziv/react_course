@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import type { RootState, AppDispatch } from '../store';
 import httpRequest, { Methods } from '../utils/httpRequest';
-import getQueryParams from '../utils/getQueryParams';
+import { FormValues, Movie } from '../types/interfaces';
 
 interface State {
-  posts: any,
+  posts: Movie[],
   isLoading: boolean,
-  error: any,
+  error: {},
 }
 
 const initialState: State = {
@@ -40,12 +41,9 @@ const postsSlice = createSlice({
   },
 });
 
-export const selectAllPosts = (state: State) => state.posts.posts;
+export const selectAllPosts = (state: RootState) => state.posts.posts;
 
-export const deleteMovie = (id: number) => async (dispatch: any, getState: any) => {
-  const { queryParams } = getState().posts;
-  const queryString = getQueryParams(queryParams);
-
+export const deleteMovie = (id: number, queryString: string) => async (dispatch: AppDispatch) => {
   try {
     const response = await httpRequest(('delete' as Methods), `/${id}`);
     if (response.status === 204) {
@@ -56,10 +54,9 @@ export const deleteMovie = (id: number) => async (dispatch: any, getState: any) 
   }
 };
 
-export const updateMovie = (body: any) => async (dispatch: any, getState: any) => {
-  const { queryParams } = getState().posts;
-  const queryString = getQueryParams(queryParams);
-
+export const updateMovie = (body: FormValues, queryString: string) => async (
+  dispatch: AppDispatch,
+) => {
   try {
     const response = await httpRequest(('put' as Methods), '', body);
     if (response.status === 200) {
@@ -70,10 +67,9 @@ export const updateMovie = (body: any) => async (dispatch: any, getState: any) =
   }
 };
 
-export const addMovie = (body: any) => async (dispatch: any, getState: any) => {
-  const { queryParams } = getState().posts;
-  const queryString = getQueryParams(queryParams);
-
+export const addMovie = (body: FormValues, queryString: string) => async (
+  dispatch: AppDispatch,
+) => {
   try {
     const response = await httpRequest(('post' as Methods), '', body);
     if (response.status === 201) {

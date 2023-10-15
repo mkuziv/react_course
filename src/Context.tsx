@@ -1,24 +1,13 @@
 import React, { useMemo, useState, createContext } from 'react';
 import ModalValue from './types/enums';
-import { Movie } from './types/interfaces';
+import { IAppContext, Movie } from './types/interfaces';
 import useToggle from './utils/hooks';
-
-interface IAppContext {
-  modal: ModalType;
-  toggleModalType ?: (value: string | null) => void;
-  editedMovie?: Movie | null;
-  setEditedMovie?: (value: Movie) => void;
-  selectedMovie?: Movie | null;
-  setSelectedMovie?: (value: Movie) => void;
-  deletedMovieID?: number | null;
-  setDeletedMovie?: (value: number | null) => void;
-}
 
 interface ChildrenProps {
   children: JSX.Element;
 }
 
-type ModalType = ModalValue | null;
+export type ModalType = ModalValue | null;
 
 const defaultState: IAppContext = {
   modal: null,

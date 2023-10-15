@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import store from '../../store';
 import Search from './Search';
 
-const renderWithProviders = (children: any) => (
+const renderWithProviders = (children: JSX.Element) => (
   render(
     <MemoryRouter>
       <Provider store={store}>
